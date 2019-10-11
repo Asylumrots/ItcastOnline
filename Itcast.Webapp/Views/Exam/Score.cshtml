@@ -1,0 +1,61 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>成绩</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <style>
+        #Box tr {
+            height: 45px;
+            text-align: center;
+        }
+            #Box tr td {
+                line-height: 35px;
+            }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="container" id="Box">
+            <h1 style="margin-left:43%;">成绩单</h1>
+            <table class="table table-bordered table-striped table-hover table-condensed">
+                <tr class="warning">
+                    <td>用户名</td>
+                    <td>分数</td>
+                </tr>
+                @{
+                    foreach (KeyValuePair<string, string> item in Model)
+                    {
+                        var css = "";
+                        if (Convert.ToInt32(@item.Value) >= 80)
+                        {
+                            css = "green";
+                        }
+                        else if (Convert.ToInt32(@item.Value) >= 60)
+                        {
+                            css = "orange";
+                        }
+                        else {
+                            css = "red";
+                        }
+                        <tr class="">
+                            <td>@item.Key</td>
+                            <td style="color:@css; font-weight:bold">@item.Value</td>
+                        </tr>
+                    }
+                }
+                
+            </table>
+            <div style="margin-left:43%;"><a href="javascript:window.opener=null;window.close();"><input type="button" class="btn btn-primary" value="确认并关闭"></a></div>
+            
+        </div>
+    </div>
+</body>
+</html>

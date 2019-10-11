@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Itcast.Model.Topic>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Test</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/pageBarStyle.css" rel="stylesheet" />
+    <style>
+        #Box tr {
+            height: 45px;
+            text-align: center;
+        }
+
+            #Box tr td {
+                line-height: 35px;
+            }
+    </style>
+    <style>
+        a.disabled {
+            pointer-events: none;
+            filter: alpha(opacity=50); /*IE滤镜，透明度50%*/
+            -moz-opacity: 0.5; /*Firefox私有，透明度50%*/
+            opacity: 0.5; /*其他，透明度50%*/
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="container-fluid" id="Box">
+            <div style="margin-left:87%">
+                <button class="btn btn-primary" onclick="location.href='@Url.Action("AddTopic", "Edit")'">
+                    <span class="glyphicon glyphicon-plus"></span>&nbsp;添加试题
+                </button>
+                <a href="/Home/TopicInfo"><input type="button" value="返回" class="btn btn-info" /></a>
+            </div>
+            <table class="table table-bordered table-striped table-hover table-condensed">
+                <tr class="">
+                    <td class="col-md-1">题目序号</td>
+                    <td class="col-md-5">题目标题</td>
+                    <td class="col-md-1">选项A</td>
+                    <td class="col-md-1">选项B</td>
+                    <td class="col-md-1">选项C</td>
+                    <td class="col-md-1">选项D</td>
+                    <td class="col-md-1">答案</td>
+                    <td class="col-md-1">操作</td>
+                </tr>
+                @{
+            foreach (var item in Model)
+            {
+                <tr class="">
+                    <td>@item.TopicID</td>
+                    <td>@item.Title</td>
+                    <td>@item.AnswerA</td>
+                    <td>@item.AnswerB</td>
+                    <td>@item.AnswerC</td>
+                    <td>@item.AnswerD</td>
+                    <td>@item.Answer</td>
+                    <td>
+                        <a href="/Edit/ModifyTopic?id=@item.TopicID">
+                            <input type="button" class="btn btn-warning" value="修改">
+                        </a>
+                        <a href="/Edit/DelTopicMethod?id=@item.TopicID">
+                            <input type="button" class="btn btn-danger" value="删除" onclick="return confirm('您确认要删除此试题?')">
+                        </a>
+                    </td>
+                </tr>
+                }
+                }
+            </table>
+            <div style="margin-left:33%">
+                <div class="page_nav">
+                    <a href='/Home/TopicManager?pageIndex=1'>首页</a>
+                    @Html.Raw(Itcast.Common.PageBarHelperManager.GetPagaBar(Convert.ToInt32(ViewData["PageIndex"]), Convert.ToInt32(ViewData["PageCount"])))
+                    <a href='/Home/TopicManager?pageIndex=@ViewData["PageCount"]'>尾页</a>
+                    <label>@Convert.ToInt32(ViewData["PageIndex"])/@Convert.ToInt32(ViewData["PageCount"])页</label>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</body>
+</html>

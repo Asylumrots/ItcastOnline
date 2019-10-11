@@ -1,0 +1,103 @@
+﻿@model IEnumerable<Itcast.Model.Test>
+@using Itcast.Model;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Test</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <style>
+        #Box tr {
+            height: 45px;
+            text-align: center;
+        }
+
+            #Box tr td {
+                line-height: 35px;
+            }
+    </style>
+    <style>
+        a.disabled {
+            pointer-events: none;
+            filter: alpha(opacity=50); /*IE滤镜，透明度50%*/
+            -moz-opacity: 0.5; /*Firefox私有，透明度50%*/
+            opacity: 0.5; /*其他，透明度50%*/
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="container" id="Box">
+            <table class="table table-bordered table-striped table-hover table-condensed">
+                <tr class="">
+                    <td>名称</td>
+                    <td>题目数量</td>
+                    <td>结束时间</td>
+                    <td>操作</td>
+                </tr>
+                @{
+                    UserInfo us = Session["Userinfo"] as UserInfo;
+                    foreach (var item in Model)
+                    {
+                        var outs = "";
+                        var btncss = "";
+                        var text = "";
+                        var into = "";
+                        if ((DateTime)DateTime.Now < @item.TestEndTime)
+                        {
+                            outs = "success";
+                            btncss = "btn btn-success";
+                            text = "进入统测";
+                        }
+                        else
+                        {
+                            outs = "danger";
+                            btncss = "btn btn-danger";
+                            text = "统测结束";
+                            //into = "disabled = 'disabled'";
+                            into = "disabled";
+                        }
+                        <tr class="@outs">
+                        <td>@item.TestName</td>
+                        <td>@item.TestNum</td>
+                        <td>@item.TestEndTime</td>
+                        <td>
+                            <a href="/Exam/Index?id=@item.TestId" target="_parent" class="@into">
+                                <input type="button" class="@btncss" value="@text">
+                            </a>
+                            @{ 
+                                if (us.Grade>=1)
+                                {
+                                    <a href="/Exam/Score?id=@item.TestId" target="_blank">
+                                    <input type="button" class="btn btn-primary" value="查看成绩">
+                                    </a>
+                                    <a href="/Edit/DelTest?id=@item.TestId" >
+                                        <input type="button" class="btn btn-danger" value="删除" onclick="return confirm('您确认要删除此次统测?')">
+                                    </a>
+                                }
+                            }
+                        </td>
+                    </tr>
+                    }
+                }
+            </table>
+            @{ 
+                if (us.Grade>=1)
+                {
+                    <div style="margin-left:42%"><button class="btn btn-warning" onclick="location.href='@Url.Action("Test", "Edit")'">
+                <span class="glyphicon glyphicon-plus"></span>&nbsp;添加统测</button></div>
+                }
+            }
+            
+            
+        </div>
+    </div>
+</body>
+</html>

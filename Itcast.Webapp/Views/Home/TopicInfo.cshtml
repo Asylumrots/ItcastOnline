@@ -1,0 +1,144 @@
+﻿@model IEnumerable<Itcast.Model.Topic>
+@using Itcast.Model;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>TopicInfo</title>
+    <link href="~/Content/pageBarStyle.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+    <div style="position:fixed;top:300px;right:10px;text-align:center;line-height:60px;">
+        <button class="btn btn-default"><a href="javaScript:void(0)" style="text-decoration:none;font-size:18px" id="dispalyAns">显示答案</a></button>
+    </div>
+    @{ 
+        UserInfo us = Session["Userinfo"] as UserInfo;
+        if (us.Grade>=1)
+        {
+            <div style="position:fixed;top:262px;right:10px;text-align:center;line-height:60px;">
+                <button class="btn btn-default"><a href="/Home/TopicManager" style="text-decoration:none;font-size:18px;color:red">试题管理</a></button>
+            </div>
+        }
+    }
+    <div style="height:20px"></div>
+    <div>
+        @foreach (var item in Model)
+        {
+            if (item.Answer.Length<=1)
+            {
+            <div class="container">
+                <form name="optionForm">
+                    <div class="col-md-12"><label class="h4">@item.TopicID.</label>@item.Title</div>
+                    <div class="col-md-12"><input type="radio" value="A" name="option" onclick="check(@item.TopicID,this.value)">&nbsp;A：@item.AnswerA</div>
+                    <div class="col-md-12"><input type="radio" value="B" name="option" onclick="check(@item.TopicID,this.value)">&nbsp;B：@item.AnswerB</div>
+                    <div class="col-md-12"><input type="radio" value="C" name="option" onclick="check(@item.TopicID,this.value)">&nbsp;C：@item.AnswerC</div>
+                    <div class="col-md-12"><input type="radio" value="D" name="option" onclick="check(@item.TopicID,this.value)">&nbsp;D：@item.AnswerD</div>
+                </form>
+                <div class="col-md-12 ans" id="ans@{@item.TopicID}" style="display:block;">答案：@item.Answer</div>
+                <hr />
+            </div>
+            }
+            else
+            {
+            <div class="container" id="check@{@item.TopicID}">
+                <form name="optionForm">
+                    <div class="col-md-12"><label class="h4">@item.TopicID.</label>@item.Title</div>
+                    <div class="col-md-12"><input type="checkbox" value="A" name="option" onclick="checks(@item.TopicID,this.value)">&nbsp;A：@item.AnswerA</div>
+                    <div class="col-md-12"><input type="checkbox" value="B" name="option" onclick="checks(@item.TopicID,this.value)">&nbsp;B：@item.AnswerB</div>
+                    <div class="col-md-12"><input type="checkbox" value="C" name="option" onclick="checks(@item.TopicID,this.value)">&nbsp;C：@item.AnswerC</div>
+                    <div class="col-md-12"><input type="checkbox" value="D" name="option" onclick="checks(@item.TopicID,this.value)">&nbsp;D：@item.AnswerD</div>
+                </form>
+                <div class="col-md-12 ans" id="ans@{@item.TopicID}" style="display:block;">答案：@item.Answer</div>
+                <hr />
+            </div>
+            }
+        }
+        <div style="margin-left:33%">
+            <div class="page_nav">
+                @Html.Raw(Itcast.Common.PageBarHelper.GetPagaBar(Convert.ToInt32(ViewData["PageIndex"]), Convert.ToInt32(ViewData["PageCount"])))
+                <label>@Convert.ToInt32(ViewData["PageIndex"])/@Convert.ToInt32(ViewData["PageCount"])页</label>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="~/Content/js/jquery-2.2.3.min.js"></script>
+<script>
+    function check(topicId,options)
+    {
+        @*@{string s="";};
+        @s=options;
+        var bool = "@Itcast.Webapp.Controllers.HomeController.SelectOption(@item.TopicID, @s)";
+        //$("#ans" + id + "").addClass('selectTrue');
+        alert(bool);*@
+        $.ajax({
+            type: "get",
+            url: "/Home/SelectOption",
+            data: { TopicID: topicId, SelectOption: options },
+            success: function (msg) {
+                //alert(msg);
+                if ($("#ans" + topicId + "").css("display")=="none") {
+                    $("#ans" + topicId + "").css("display", "block");
+                }
+                if (msg=="True") {
+                    $("#ans" + topicId + "").css("color","green");
+                }
+                else {
+                    $("#ans" + topicId + "").css("color","red");
+                }
+            }
+        });
+    }
+    function checks(topicId, options) {
+        var select = "";
+        var obj = $("#check" + topicId + "  input:checked")
+        for (var i = 0; i < obj.length; i++) {
+            select += obj.eq(i).val();
+        }
+        $.ajax({
+            type: "get",
+            url: "/Home/SelectOption",
+            data: { TopicID: topicId, SelectOption: select },
+            success: function (msg) {
+                //alert(msg);
+                if ($("#ans" + topicId + "").css("display") == "none") {
+                    $("#ans" + topicId + "").css("display", "block");
+                }
+                if (msg == "True") {
+                    $("#ans" + topicId + "").css("color", "green");
+                }
+                else {
+                    $("#ans" + topicId + "").css("color", "red");
+                }
+            }
+        });
+    }
+</script>
+<script>
+    $(function () {
+        $("#dispalyAns").click(function () {
+            if ($("#dispalyAns").text() == "显示答案") {
+                $("#dispalyAns").text("隐藏答案");
+                $(".ans").css("display", "none");
+            }
+            else {
+                $("#dispalyAns").text("显示答案");
+                $(".ans").css("display", "block");
+            }
+        });
+
+        //$("#optionForm").change(function () {
+        //    $.get("SelectOption", { select: $("#optionForm input:radio:checked").val() }, function (data) {
+        //        alert(data);
+        //    })
+        //});
+    })
+</script>
+</html>

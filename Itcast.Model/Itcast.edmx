@@ -1,0 +1,362 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ItcastModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Mark">
+          <Key>
+            <PropertyRef Name="MarkId" />
+          </Key>
+          <Property Name="MarkId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TestId" Type="int" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="Score" Type="int" Nullable="false" />
+          <Property Name="SubmitDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Msg">
+          <Key>
+            <PropertyRef Name="MsgId" />
+          </Key>
+          <Property Name="MsgId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SendId" Type="int" />
+          <Property Name="ReceiveId" Type="int" />
+          <Property Name="MsgTxt" Type="varchar(max)" Nullable="false" />
+          <Property Name="MsgSendTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Test">
+          <Key>
+            <PropertyRef Name="TestId" />
+          </Key>
+          <Property Name="TestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TestName" Type="varchar(max)" />
+          <Property Name="TestNum" Type="int" Nullable="false" />
+          <Property Name="TestEndTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Topic">
+          <Key>
+            <PropertyRef Name="TopicID" />
+          </Key>
+          <Property Name="TopicID" Type="int" Nullable="false" />
+          <Property Name="Title" Type="varchar(max)" />
+          <Property Name="AnswerA" Type="varchar(max)" />
+          <Property Name="AnswerB" Type="varchar(max)" />
+          <Property Name="AnswerC" Type="varchar(max)" />
+          <Property Name="AnswerD" Type="varchar(max)" />
+          <Property Name="Answer" Type="nvarchar" MaxLength="255" />
+          <Property Name="CourseID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Pwd" Type="varchar(max)" Nullable="false" />
+          <Property Name="Sex" Type="varchar" MaxLength="2" />
+          <Property Name="Age" Type="int" />
+          <Property Name="Email" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="RegTime" Type="datetime" Nullable="false" />
+          <Property Name="Grade" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Mark__TestId__3D5E1FD2">
+          <End Role="Test" Type="Self.Test" Multiplicity="0..1" />
+          <End Role="Mark" Type="Self.Mark" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Test">
+              <PropertyRef Name="TestId" />
+            </Principal>
+            <Dependent Role="Mark">
+              <PropertyRef Name="TestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Mark__UserId__3E52440B">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+          <End Role="Mark" Type="Self.Mark" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Mark">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Msg__ReceiveId__4316F928">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+          <End Role="Msg" Type="Self.Msg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Msg">
+              <PropertyRef Name="ReceiveId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Msg__SendId__4222D4EF">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+          <End Role="Msg" Type="Self.Msg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Msg">
+              <PropertyRef Name="SendId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ItcastModelStoreContainer">
+          <EntitySet Name="Mark" EntityType="Self.Mark" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Msg" EntityType="Self.Msg" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Test" EntityType="Self.Test" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Topic" EntityType="Self.Topic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Mark__TestId__3D5E1FD2" Association="Self.FK__Mark__TestId__3D5E1FD2">
+            <End Role="Test" EntitySet="Test" />
+            <End Role="Mark" EntitySet="Mark" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Mark__UserId__3E52440B" Association="Self.FK__Mark__UserId__3E52440B">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="Mark" EntitySet="Mark" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Msg__ReceiveId__4316F928" Association="Self.FK__Msg__ReceiveId__4316F928">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="Msg" EntitySet="Msg" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Msg__SendId__4222D4EF" Association="Self.FK__Msg__SendId__4222D4EF">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="Msg" EntitySet="Msg" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ItcastModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Mark">
+          <Key>
+            <PropertyRef Name="MarkId" />
+          </Key>
+          <Property Name="MarkId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TestId" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="Score" Type="Int32" Nullable="false" />
+          <Property Name="SubmitDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Test" Relationship="Self.FK__Mark__TestId__3D5E1FD2" FromRole="Mark" ToRole="Test" />
+          <NavigationProperty Name="UserInfo" Relationship="Self.FK__Mark__UserId__3E52440B" FromRole="Mark" ToRole="UserInfo" />
+        </EntityType>
+        <EntityType Name="Msg">
+          <Key>
+            <PropertyRef Name="MsgId" />
+          </Key>
+          <Property Name="MsgId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SendId" Type="Int32" />
+          <Property Name="ReceiveId" Type="Int32" />
+          <Property Name="MsgTxt" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MsgSendTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="UserInfo" Relationship="Self.FK__Msg__ReceiveId__4316F928" FromRole="Msg" ToRole="UserInfo" />
+          <NavigationProperty Name="UserInfo1" Relationship="Self.FK__Msg__SendId__4222D4EF" FromRole="Msg" ToRole="UserInfo" />
+        </EntityType>
+        <EntityType Name="Test">
+          <Key>
+            <PropertyRef Name="TestId" />
+          </Key>
+          <Property Name="TestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TestName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TestNum" Type="Int32" Nullable="false" />
+          <Property Name="TestEndTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Mark" Relationship="Self.FK__Mark__TestId__3D5E1FD2" FromRole="Test" ToRole="Mark" />
+        </EntityType>
+        <EntityType Name="Topic">
+          <Key>
+            <PropertyRef Name="TopicID" />
+          </Key>
+          <Property Name="TopicID" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AnswerA" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AnswerB" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AnswerC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AnswerD" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Answer" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CourseID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Pwd" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sex" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RegTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Grade" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Mark" Relationship="Self.FK__Mark__UserId__3E52440B" FromRole="UserInfo" ToRole="Mark" />
+          <NavigationProperty Name="Msg" Relationship="Self.FK__Msg__ReceiveId__4316F928" FromRole="UserInfo" ToRole="Msg" />
+          <NavigationProperty Name="Msg1" Relationship="Self.FK__Msg__SendId__4222D4EF" FromRole="UserInfo" ToRole="Msg" />
+        </EntityType>
+        <Association Name="FK__Mark__TestId__3D5E1FD2">
+          <End Role="Test" Type="Self.Test" Multiplicity="0..1" />
+          <End Role="Mark" Type="Self.Mark" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Test">
+              <PropertyRef Name="TestId" />
+            </Principal>
+            <Dependent Role="Mark">
+              <PropertyRef Name="TestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Mark__UserId__3E52440B">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+          <End Role="Mark" Type="Self.Mark" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Mark">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Msg__ReceiveId__4316F928">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+          <End Role="Msg" Type="Self.Msg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Msg">
+              <PropertyRef Name="ReceiveId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Msg__SendId__4222D4EF">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+          <End Role="Msg" Type="Self.Msg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Msg">
+              <PropertyRef Name="SendId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ItcastEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Mark" EntityType="Self.Mark" />
+          <EntitySet Name="Msg" EntityType="Self.Msg" />
+          <EntitySet Name="Test" EntityType="Self.Test" />
+          <EntitySet Name="Topic" EntityType="Self.Topic" />
+          <EntitySet Name="UserInfo" EntityType="Self.UserInfo" />
+          <AssociationSet Name="FK__Mark__TestId__3D5E1FD2" Association="Self.FK__Mark__TestId__3D5E1FD2">
+            <End Role="Test" EntitySet="Test" />
+            <End Role="Mark" EntitySet="Mark" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Mark__UserId__3E52440B" Association="Self.FK__Mark__UserId__3E52440B">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="Mark" EntitySet="Mark" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Msg__ReceiveId__4316F928" Association="Self.FK__Msg__ReceiveId__4316F928">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="Msg" EntitySet="Msg" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Msg__SendId__4222D4EF" Association="Self.FK__Msg__SendId__4222D4EF">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="Msg" EntitySet="Msg" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ItcastModelStoreContainer" CdmEntityContainer="ItcastEntities">
+          <EntitySetMapping Name="Mark">
+            <EntityTypeMapping TypeName="ItcastModel.Mark">
+              <MappingFragment StoreEntitySet="Mark">
+                <ScalarProperty Name="MarkId" ColumnName="MarkId" />
+                <ScalarProperty Name="TestId" ColumnName="TestId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="SubmitDate" ColumnName="SubmitDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Msg">
+            <EntityTypeMapping TypeName="ItcastModel.Msg">
+              <MappingFragment StoreEntitySet="Msg">
+                <ScalarProperty Name="MsgId" ColumnName="MsgId" />
+                <ScalarProperty Name="SendId" ColumnName="SendId" />
+                <ScalarProperty Name="ReceiveId" ColumnName="ReceiveId" />
+                <ScalarProperty Name="MsgTxt" ColumnName="MsgTxt" />
+                <ScalarProperty Name="MsgSendTime" ColumnName="MsgSendTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Test">
+            <EntityTypeMapping TypeName="ItcastModel.Test">
+              <MappingFragment StoreEntitySet="Test">
+                <ScalarProperty Name="TestId" ColumnName="TestId" />
+                <ScalarProperty Name="TestName" ColumnName="TestName" />
+                <ScalarProperty Name="TestNum" ColumnName="TestNum" />
+                <ScalarProperty Name="TestEndTime" ColumnName="TestEndTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Topic">
+            <EntityTypeMapping TypeName="ItcastModel.Topic">
+              <MappingFragment StoreEntitySet="Topic">
+                <ScalarProperty Name="TopicID" ColumnName="TopicID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="AnswerA" ColumnName="AnswerA" />
+                <ScalarProperty Name="AnswerB" ColumnName="AnswerB" />
+                <ScalarProperty Name="AnswerC" ColumnName="AnswerC" />
+                <ScalarProperty Name="AnswerD" ColumnName="AnswerD" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInfo">
+            <EntityTypeMapping TypeName="ItcastModel.UserInfo">
+              <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Pwd" ColumnName="Pwd" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="RegTime" ColumnName="RegTime" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

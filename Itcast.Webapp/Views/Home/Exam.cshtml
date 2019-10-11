@@ -1,0 +1,164 @@
+﻿@model IEnumerable<Itcast.Model.Topic>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Exam</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+    @*<h2>@ViewBag.Title.</h2>
+        <h3>@ViewBag.Message</h3>*@
+    <hr />
+    @{ int id = 1;}
+    @foreach (var item in Model)
+    {
+        if (item.Answer.Length <= 1)
+        {
+            <div class="container">
+                <form name="optionForm">
+                    <div class="col-md-12"><label class="h4">@id.</label>@item.Title</div>
+                    <div class="col-md-12"><input type="radio" value="A" name="option" onclick="check(@item.TopicID,this.value)">&nbsp;A：@item.AnswerA</div>
+                    <div class="col-md-12"><input type="radio" value="B" name="option" onclick="check(@item.TopicID,this.value)">&nbsp;B：@item.AnswerB</div>
+                    <div class="col-md-12"><input type="radio" value="C" name="option" onclick="check(@item.TopicID,this.value)">&nbsp;C：@item.AnswerC</div>
+                    <div class="col-md-12"><input type="radio" value="D" name="option" onclick="check(@item.TopicID,this.value)">&nbsp;D：@item.AnswerD</div>
+                </form>
+                <div class="col-md-12 ans" id="ans@{@item.TopicID}"></div>
+                <hr />
+            </div>
+        }
+        else
+        {
+            <div class="container" id="check@{@id}">
+                <form name="optionForm">
+                    <div class="col-md-12"><label class="h4">@id.</label>@item.Title</div>
+                    <div class="col-md-12"><input type="checkbox" value="A" name="option" onclick="checks(@item.TopicID,this.value,@id)">&nbsp;A：@item.AnswerA</div>
+                    <div class="col-md-12"><input type="checkbox" value="B" name="option" onclick="checks(@item.TopicID,this.value,@id)">&nbsp;B：@item.AnswerB</div>
+                    <div class="col-md-12"><input type="checkbox" value="C" name="option" onclick="checks(@item.TopicID,this.value,@id)">&nbsp;C：@item.AnswerC</div>
+                    <div class="col-md-12"><input type="checkbox" value="D" name="option" onclick="checks(@item.TopicID,this.value,@id)">&nbsp;D：@item.AnswerD</div>
+                </form>
+                <div class="col-md-12 ans" id="ans@{@item.TopicID}"></div>
+                <hr />
+            </div>
+        }
+        id = id + 1;
+    }
+    @{
+        string num = Request["nums"];
+    }
+    <script src="~/Content/js/jquery-2.2.3.min.js"></script>
+    <script>
+    var json = {  };
+    function check(topicId, options) {
+        json[topicId] = options;
+        //$.ajax({
+        //    type: "get",
+        //    url: "/Home/FullTopicTrue",
+        //    data: { TopicID: topicId, SelectOption: options},
+        //});
+        }
+        function checks(topicId, options, id) {
+            var select = "";
+            var obj = $("#check" + id + "  input:checked")
+            for (var i = 0; i < obj.length; i++) {
+                select += obj.eq(i).val();
+            }
+            json[topicId] = select;
+        }
+    // 遍历解析Json
+    function parseJson(jsonObj) {
+        // 循环所有键
+        for (var key in jsonObj) {
+            //如果对象类型为object类型且数组长度大于0 或者 是对象 ，继续递归解析
+            var element = jsonObj[key];
+            if (element.length > 0 && typeof (element) == "object" || typeof (element) == "object") {
+                parseJson(element);
+            } else { //不是对象或数组、直接输出
+                console.log( + key + ":" + element + " ");
+            }
+
+        }
+    }
+    $(function () {
+        $("#submitJson").click(function () {
+            var jslength = 0;
+            for (var js2 in json) {
+                jslength++;
+            }
+            if (jslength <@num) {
+                return confirm("你还有未做完的题目!");
+            }
+            console.log(jslength);
+            $.ajax({
+                type: "post",
+                url: "/Home/FullTopicTrue",
+                data: JSON.stringify(json),//序列化成json格式的数据，反格式化用json.parse()
+                datatype: "json",
+                success: function (result) {
+                    var truejson = JSON.parse(result);
+                    var jslength = 0;
+                    for (var js2 in json) {
+                        jslength++;
+                    }
+                    var truenums = 0;
+                    for (var key in json) {
+                        console.log(+ key + ":" + json[key] + " / " + truejson[key]);
+                        if (json[key] == truejson[key]) {
+                            $("#ans" + key).text("答案：" + truejson[key]).css("color", "green");
+                            truenums++;
+                        }
+                        else {
+                            $("#ans" + key).text("答案：" + truejson[key]).css("color", "red");
+                        }
+                    }
+                    var fenshu = truenums * (100 / @num);
+                    fenshu = Math.round(fenshu);
+                    //存储分数
+                    //$.ajax({
+                    //    type: "post",
+                    //    url: "/Exam/SaveScore",
+                    //    data: { "TestId": ViewData["TestId"], "UserId": ViewData["UserId"], "Score": fenshu },
+                    //})
+                    $("#fenshu").text(fenshu);
+                    //$("#fenshu").append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='/Home/Index'><input type='button' class='btn btn-primary' value='返回主页'></a>")
+                    if (fenshu >= 80) {
+                        $("#fenshu").css("color", "green");
+                    }
+                    else if (fenshu >=60) {
+                        $("#fenshu").css("color", "orange");
+                    }
+                    else {
+                        $("#fenshu").css("color", "red");
+                    }
+                }
+            })
+        })
+    })
+
+    </script>
+    <div class="container">
+        <input type="button" value="提交" class="btn btn-success" id="submitJson" />
+        <div>
+            您的分数：<p id="fenshu" style="display:inline;font-size:x-large;position:relative;left:10px;"></p>
+        </div>
+        <address>
+            One Microsoft Way<br />
+            Redmond, WA 98052-6399<br />
+            <abbr title="Phone">P:</abbr>
+            425.555.0100
+        </address>
+
+        <address>
+            <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+            <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+        </address>
+    </div>
+</body>
+</html>

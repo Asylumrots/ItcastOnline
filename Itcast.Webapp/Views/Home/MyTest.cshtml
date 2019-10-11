@@ -1,0 +1,122 @@
+﻿@model IEnumerable<Itcast.Model.UserInfo>
+@using Itcast.Model;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>MyTest</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        #Box tr {
+            height: 45px;
+            text-align: center;
+        }
+
+            #Box tr td {
+                line-height: 35px;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="startBox" style="margin-left:33%;margin-top:20px;">
+            测试题目数量：<input type="text" id="TopicNums" name="TopicNums" maxlength="3" />
+            <button id="start" class="btn btn-success">开始测试</button>
+        </div>
+        <br />
+        @{
+        UserInfo us = Session["Userinfo"] as UserInfo;
+        if (us.Grade >= 1)
+        {
+            <div class="container-fluid" id="Box">
+                <table class="table table-bordered table-striped table-hover table-condensed">
+                    <tr class="">
+                        <td class="col-md-">用户序号</td>
+                        <td class="col-md-">用户名称</td>
+                        <td class="col-md-">性别</td>
+                        <td class="col-md-">年龄</td>
+                        <td class="col-md-">邮箱</td>
+                        <td class="col-md-">注册时间</td>
+                        <td class="col-md-">用户权限</td>
+                        <td>操作</td>
+                    </tr>
+                    @{
+                    foreach (var item in Model)
+                    {
+                        <tr class="">
+                            <td>@item.Id</td>
+                            <td>@item.Name</td>
+                            <td>@item.Sex</td>
+                            <td>@item.Age</td>
+                            <td>@item.Email</td>
+                            <td>@item.RegTime</td>
+                            <td>
+                                @{
+                                var g = "";
+                                if (@item.Grade == 2)
+                                {
+                                    g = "统治者";@g
+                                }
+                                else if (@item.Grade == 1)
+                                {
+                                    g = "管理员";@g
+                                }
+                                else
+                                {
+                                     g = "用户";@g
+                                }
+                                }
+                            </td>
+                            @{ 
+                                if (us.Grade==2)
+                                {
+                                    <td>
+                                    <a href="/Edit/ModifyUser?id=@item.Id">
+                                        <input type="button" class="btn btn-warning" value="修改">
+                                    </a>
+                                    <a href="/Edit/DelUserMethod?id=@item.Id">
+                                        <input type="button" class="btn btn-danger" value="删除" onclick="return confirm('您确认要删除此用户?')">
+                                    </a>
+                                    </td>
+                                }
+                            }
+                    </tr>
+            }
+                    }
+                </table>
+
+            </div>
+    }
+        }
+    </div>
+    <script src="~/Content/js/jquery-2.2.3.min.js"></script>
+    <script>
+        $(function () {
+            $("#start").click(function () {
+                var nums = $("#TopicNums").val();
+                if (nums == "") {
+                    alert("请先输入测试题目的数量！");
+                    return;
+                }
+                window.location.href = "Exam?nums=" + nums;
+            });
+        })
+    </script>
+    <style>
+        #TopicNums {
+            height: 20px;
+            width: 30px;
+        }
+
+        #start {
+            position: relative;
+            left: 10px;
+        }
+    </style>
+</body>
+</html>

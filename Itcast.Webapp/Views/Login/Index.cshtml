@@ -1,0 +1,204 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>登陆</title>
+    <!-- Meta tag Keywords -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <meta name="keywords" content="" />
+    <script>
+		addEventListener("load", function () {
+			setTimeout(hideURLbar, 0);
+		}, false);
+
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+        }
+        function afterLogin(data) {
+            if (data == "ok") {
+                window.location.href = "/Home/Index";
+            }
+            else if (data == "no") {
+                $("#validateImg").attr("src", $("#validateImg").attr("src") + 1);
+                alert("用户名或密码错误！");
+            }
+            else if (data == "validateError") {
+                $("#validateImg").attr("src", $("#validateImg").attr("src") + 1);
+                $("#validate").val("");
+                alert("验证码错误！");
+            }
+            else {
+                alert("系统繁忙！")
+            }
+        }
+        function afterRegister(data)
+        {
+            if (data == "registerYes")
+            {
+                alert("注册成功！");
+                window.location.href = "/Login/Index?id=" + document.getElementById("registerUserName").value;
+            }
+            else if (data == "registerNo") {
+                alert("注册失败！请重试");
+            }
+            else {
+                alert("系统繁忙！")
+            }
+        }
+        
+    </script>
+    <!-- Meta tag Keywords -->
+    <!-- css files -->
+    <link rel="stylesheet" href="~/Content/css/style.css" type="text/css" media="all" />
+    <!-- Style-CSS -->
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Font-Awesome-Icons-CSS -->
+    <!-- //css files -->
+    <!-- web-fonts -->
+    <link href="~/Content///fonts.googleapis.com/css?family=Magra:400,700&amp;subset=latin-ext" rel="stylesheet">
+    <!-- //web-fonts -->
+</head>
+
+<body>
+    <!-- title -->
+    <p id="phead">
+        欢迎
+    </p>
+    <!-- //title -->
+    <!-- content -->
+    <div class="container-agille">
+
+        <div class="formBox level-login">
+            <div class="box boxShaddow"></div>
+            <div class="box loginBox">
+                <h3>请登陆</h3>
+                @using (Ajax.BeginForm("UserLogin", new { }, new AjaxOptions() { HttpMethod = "post", OnSuccess = "afterLogin" }, new { id = "LoginForm" }))
+                {
+                    <div class="f_row-2">
+                        <input type="text" class="input-field" placeholder="用户名" name="name" required id="userName">
+                    </div>
+                    <div class="f_row-2 last">
+                        <input type="password" name="password" placeholder="密码" class="input-field" required>
+                    </div>
+                    <div class="f_row-2 last">
+                        <input type="text" name="validate" placeholder="验证码" class="input-field" required id="validate" style="width:130px;">
+                        <img id="validateImg" src="/Login/showValidate?id=1" style="position:absolute;padding:0px;margin:0px;left:200px;"/>
+                        <a href="javaScript:void(0)" style="position:absolute;left:296px;bottom:145px;font-size:13px;" id="changeValidate">看不清？换一张</a>
+                    </div>
+                    <input class="submit-w3" type="submit" id="Login" value="登陆">
+                    <div class="f_link" style="padding-top:10px">
+                        <a href="" class="regTag" id="regTags">没有用户?点此注册</a>
+                        <div style="width:280px;display:inline-block"></div>
+                        <a href="" class="resetTag">忘记密码?</a>
+                    </div>
+                }
+            </div>
+            <div class="box forgetbox agile" style="height:335px;">
+                <a href="#" class="back icon-back">
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                         viewBox="0 0 199.404 199.404" style="enable-background:new 0 0 199.404 199.404;" xml:space="preserve">
+                    <polygon points="199.404,81.529 74.742,81.529 127.987,28.285 99.701,0 0,99.702 99.701,199.404 127.987,171.119 74.742,117.876
+			  199.404,117.876 " />
+					</svg>
+                </a>
+                <h3>找回密码</h3>
+                @using (Ajax.BeginForm("sendEmali", new { }, new AjaxOptions() { HttpMethod = "post" }, new { id = "sendForm" }))
+                {
+                    <p style="margin:0px;">我们将发送一封邮件到您的信箱中</p><p>您可以通过此邮件来重置您的密码</p>
+                    <div class="f_row last">
+                        <label>邮箱地址</label>
+                        <input type="text" name="email" placeholder="Email" class="input-field" required>
+                        <u></u>
+                    </div>
+                    <button class="btn button submit-w3" id="btnSendEamil" type="submit">
+                        <span>发送</span>
+                    </button>
+                }
+            </div>
+            <div class="box registerBox wthree">
+                <span class="reg_bg"></span>
+                <h3>注册</h3>
+                @using (Ajax.BeginForm("UserRegister", new { }, new AjaxOptions() { HttpMethod = "post", OnSuccess = "afterRegister" }, new { id = "RegisterForm" }))
+                {
+                    <div class="f_row-2">
+                        <input type="text" class="input-field" placeholder="用户名" name="name" required id="registerUserName">
+                    </div>
+                    <div class="f_row-2 last">
+                        <input type="password" name="password1" placeholder="密码" id="password1" class="input-field" required>
+                    </div>
+                    <div class="f_row-2 last">
+                        <input type="password" name="password" placeholder="确认密码" id="password2" class="input-field" required>
+                    </div>
+                    <div class="f_row-2 last">
+                        <input type="email" name="email" placeholder="邮箱地址" id="email" class="input-field" required>
+                    </div>
+                    <input class="submit-w3" type="submit" value="注册">
+                }
+            </div>
+            <a href="#" class="regTag icon-add">
+                <i class="fa fa-repeat" aria-hidden="true"></i>
+            </a>
+        </div>
+    </div>
+    <!-- //content -->
+    <!-- copyright -->
+    <div class="footer-w3ls">
+        <h2>
+            &copy; 2019 Login & Register Forms. All rights reserved | Design by ZW
+        </h2>
+    </div>
+    <!-- //copyright -->
+    <!-- js files -->
+    <!-- Jquery -->
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <!-- //Jquery -->
+    <!-- input fields js -->
+    <script src="~/Content/js/input-field.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <!-- //input fields js -->
+    <!-- password-script -->
+    <script>
+        window.onload = function () {
+            document.getElementById("password1").onchange = validatePassword;
+            document.getElementById("password2").onchange = validatePassword;
+            //js中处理路由问号传参获取值
+            var url = location.search;
+            var Request = new Object();
+            if (url.indexOf("?") != -1) {
+                var str = url.substr(1);
+                Request[str.split("=")[0]] = (str.split("=")[1]);
+            }
+            if (Request["id"] != null)
+            {
+                document.getElementById("userName").value = Request["id"]; 
+            }
+
+            document.getElementById("changeValidate").onclick = function () {
+                $("#validateImg").attr("src", $("#validateImg").attr("src") + 1);
+            }
+           
+        }
+
+
+        function validatePassword() {
+            var pass2 = document.getElementById("password2").value;
+            var pass1 = document.getElementById("password1").value;
+            if (pass1 != pass2)
+                document.getElementById("password2").setCustomValidity("两次密码不一致");
+            else
+                document.getElementById("password2").setCustomValidity('');
+            //empty string means no validation error
+        }
+    </script>
+    <!-- //password-script -->
+    <!-- //js files -->
+
+
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{97B9A8A5-43A5-42EC-81AC-95112BB04AFE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Itcast.BLL</RootNamespace>
+    <AssemblyName>Itcast.BLL</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseManager.cs" />
+    <Compile Include="MarkManager.cs" />
+    <Compile Include="MsgManager.cs" />
+    <Compile Include="TopicManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestManager.cs" />
+    <Compile Include="UserInfoManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Itcast.DALFactory\Itcast.DALFactory.csproj">
+      <Project>{c8e31e33-d0a1-47dc-a5df-829fb3243f6b}</Project>
+      <Name>Itcast.DALFactory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Itcast.DAL\Itcast.DAL.csproj">
+      <Project>{d7385047-0e0c-471f-8744-d1a6c2a5be6e}</Project>
+      <Name>Itcast.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Itcast.IBLL\Itcast.IBLL.csproj">
+      <Project>{d0fdada3-cc93-4e0b-ae3f-9016e681ea6e}</Project>
+      <Name>Itcast.IBLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Itcast.IDAL\Itcast.IDAL.csproj">
+      <Project>{8277635a-cdf0-4912-bf8d-6dee7e784bcd}</Project>
+      <Name>Itcast.IDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Itcast.Model\Itcast.Model.csproj">
+      <Project>{6eccfed8-dfd6-4779-98f1-68069ff7cb5c}</Project>
+      <Name>Itcast.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

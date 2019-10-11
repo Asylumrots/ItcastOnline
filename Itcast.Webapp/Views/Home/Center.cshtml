@@ -1,0 +1,144 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Center</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/Center/style.css" rel="stylesheet" />
+    <script src="~/Content/Center/theme-scripts.js"></script>
+    <script src="~/Content/Center/SmoothScroll.js"></script>
+    <style>
+        .imgs {
+        height:200px;
+        width:582px;
+        }
+        .txts {
+            position:relative;
+            bottom:120px;
+        }
+    </style>
+</head>
+<body>
+    <div style="margin-left:30%;display:none;   ">
+        <input type="button" onclick="window.parent.selectTest()" value="查看统测" class="btn btn-default">
+        <input type="button" onclick="window.parent.selectMyTest()" value="自我测试" class="btn btn-default">
+        <input type="button" onclick="window.parent.selectTopic()" value="题目一览" class="btn btn-default">
+        <input type="button" onclick="window.parent.selectUserInfo()" value="个人信息" class="btn btn-default">
+        <input type="button" onclick="window.parent.selectMsg()" value="消息" class="btn btn-default">
+        <input type="button" onclick="window.parent.selectSecurity()" value="安全设置" class="btn btn-default">
+    </div>
+    <div class="container">
+        <div class="row row-0-gutter">
+            <!-- start portfolio item -->
+            <div class="col-md-6 col-0-gutter" onclick="window.parent.selectTest()">
+                <div class="ot-portfolio-item">
+                    <figure class="effect-bubba">
+                        <img src="~/Content/Center/timg (1).jpg" alt="img02" class="img-responsive imgs" />
+                        <figcaption>
+                            <div class="txts">
+                                <h2>统测</h2>
+                                <p>正在进行的统测：@ViewData["IngTestNum"] &nbsp;&nbsp;已结束的统测：@ViewData["EndTestNum"]</p>
+                                @*<a href="#" data-toggle="modal" data-target="#Modal-1">View more</a>*@
+                            </div>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+            <!-- end portfolio item -->
+            <!-- start portfolio item -->
+            <div class="col-md-6 col-0-gutter" onclick="window.parent.selectMyTest()">
+                <div class="ot-portfolio-item">
+                    <figure class="effect-bubba">
+                        <img src="~/Content/Center/timg (1).jpg" alt="img02" class="img-responsive imgs" />
+                        <figcaption>
+                            <div class="txts">
+                                <h2>自我测试</h2>
+                                <p>指定数量，随机题目</p>
+                                @*<a href="#" data-toggle="modal" data-target="#Modal-2">View more</a>*@
+                            </div>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+            <!-- end portfolio item -->
+        </div>
+        <div class="row row-0-gutter" >
+            <!-- start portfolio item -->
+            <div class="col-md-6 col-0-gutter" onclick="window.parent.selectTopic()">
+                <div class="ot-portfolio-item">
+                    <figure class="effect-bubba"> 
+                        <img src="~/Content/Center/timg (1).jpg" alt="img02" class="img-responsive imgs" />
+                        <figcaption>
+                            <div class="txts">
+                                <h2>题目一览</h2>
+                                <p>题目数量：@ViewData["TopicNum"]</p>
+                                @*<a href="#" data-toggle="modal" data-target="#Modal-3">View more</a>*@
+                            </div>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+            <!-- end portfolio item -->
+            <!-- start portfolio item -->
+            <div class="col-md-6 col-0-gutter" onclick="window.parent.selectMsg()">
+                <div class="ot-portfolio-item">
+                    <figure class="effect-bubba">
+                        <img src="~/Content/Center/timg (1).jpg" alt="img02" class="img-responsive imgs" />
+                        <figcaption>
+                            <div class="txts">
+                                <h2>消息</h2>
+                                <p>查看发送的新消息</p>
+                                @*<a href="#" data-toggle="modal" data-target="#Modal-4">View more</a>*@
+                            </div>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+            <!-- end portfolio item -->
+        </div>
+        <div class="row row-0-gutter">
+            <!-- start portfolio item -->
+            <div class="col-md-6 col-0-gutter" onclick="window.parent.selectUserInfo()">
+                <div class="ot-portfolio-item">
+                    <figure class="effect-bubba">
+                        <img src="~/Content/Center/timg (1).jpg" alt="img02" class="img-responsive imgs" />
+                        <figcaption>
+                            <div class="txts">
+                                <h2>个人信息</h2>
+                                <p>设置修改个人信息</p>
+                                @*<a href="#" data-toggle="modal" data-target="#Modal-5">View more</a>*@
+                            </div>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+            <!-- end portfolio item -->
+            <!-- start portfolio item -->
+            <div class="col-md-6 col-0-gutter" onclick="window.parent.selectSecurity()">
+                <div class="ot-portfolio-item">
+                    <figure class="effect-bubba">
+                        <img src="~/Content/Center/timg (1).jpg" alt="img02" class="img-responsive imgs" />
+                        <figcaption>
+                            <div class="txts">
+                                <h2>安全设置</h2>
+                                <p>提升安全性</p>
+                                @*<a href="#" data-toggle="modal" data-target="#Modal-2">View more</a>*@
+                                </div>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+            <!-- end portfolio item -->
+        </div>
+
+    </div>
+</body>
+</html>
