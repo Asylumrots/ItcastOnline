@@ -288,7 +288,6 @@
     <Content Include="Views\Home\TopicInfo.cshtml" />
     <Content Include="Views\Home\MyTest.cshtml" />
     <Content Include="Views\Home\Exam.cshtml" />
-    <Content Include="Views\Home\UserIndex.cshtml" />
     <Content Include="Views\Home\Test.cshtml" />
     <Content Include="Views\Exam\Index.cshtml" />
     <Content Include="Views\Exam\Score.cshtml" />
@@ -299,7 +298,6 @@
     <Content Include="Views\Home\TopicManager.cshtml" />
     <Content Include="Views\Edit\AddTopic.cshtml" />
     <Content Include="Views\Edit\ModifyTopic.cshtml" />
-    <Content Include="Views\Home\UserManager.cshtml" />
     <Content Include="Views\Edit\ModifyUser.cshtml" />
     <Content Include="Views\Shared\GradeError.cshtml" />
   </ItemGroup>
@@ -320,6 +318,9 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Itcast.BLL\Itcast.BLL.csproj">
@@ -350,9 +351,6 @@
       <Project>{6eccfed8-dfd6-4779-98f1-68069ff7cb5c}</Project>
       <Name>Itcast.Model</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
