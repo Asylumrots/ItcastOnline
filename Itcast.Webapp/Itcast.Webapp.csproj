@@ -201,7 +201,6 @@
     <Content Include="HtmlContent\css\page.css" />
     <Content Include="HtmlContent\gulpfile.js" />
     <Content Include="HtmlContent\img\avatar.jpg" />
-    <Content Include="HtmlContent\index.html" />
     <Content Include="HtmlContent\lib\base.min.css" />
     <Content Include="HtmlContent\lib\fontello\fontello.css" />
     <Content Include="HtmlContent\lib\fontello\fonts\fontello.svg" />
@@ -210,18 +209,6 @@
     <Content Include="HtmlContent\lib\raleway\fonts\raleway-medium.svg" />
     <Content Include="HtmlContent\lib\raleway\fonts\raleway_thin.svg" />
     <Content Include="HtmlContent\lib\raleway\raleway.css" />
-    <Content Include="HtmlContent\pages\alert.html" />
-    <Content Include="HtmlContent\pages\button.html" />
-    <Content Include="HtmlContent\pages\chart.html" />
-    <Content Include="HtmlContent\pages\checkbox.html" />
-    <Content Include="HtmlContent\pages\dialog.html" />
-    <Content Include="HtmlContent\pages\form.html" />
-    <Content Include="HtmlContent\pages\grid.html" />
-    <Content Include="HtmlContent\pages\layout.html" />
-    <Content Include="HtmlContent\pages\menu.html" />
-    <Content Include="HtmlContent\pages\page.html" />
-    <Content Include="HtmlContent\pages\panel.html" />
-    <Content Include="HtmlContent\pages\table.html" />
     <Content Include="HtmlContent\src\entries\main.js" />
     <Content Include="HtmlContent\src\entries\sign.js" />
     <Content Include="HtmlContent\src\sign.html" />
@@ -241,8 +228,6 @@
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\fonts\FontAwesome.otf" />
-    <Content Include="HtmlContent\.babelrc" />
-    <Content Include="HtmlContent\.gitignore" />
     <Content Include="HtmlContent\less\index.less" />
     <Content Include="HtmlContent\less\page.less" />
     <Content Include="HtmlContent\lib\fontello\fonts\fontello.eot" />
@@ -258,8 +243,6 @@
     <Content Include="HtmlContent\lib\raleway\fonts\raleway_thin.eot" />
     <Content Include="HtmlContent\lib\raleway\fonts\raleway_thin.ttf" />
     <Content Include="HtmlContent\lib\raleway\fonts\raleway_thin.woff" />
-    <Content Include="HtmlContent\package.json" />
-    <Content Include="HtmlContent\README.md" />
     <Content Include="HtmlContent\src\common\dialog.vue" />
     <Content Include="HtmlContent\src\common\tip.vue" />
     <Content Include="HtmlContent\src\components\Index.vue" />
