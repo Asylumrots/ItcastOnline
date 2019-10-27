@@ -152,6 +152,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\EditController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\ExamController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -161,23 +162,30 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CanvasContent\css\fontello.css" />
+    <Content Include="CanvasContent\css\main.css" />
+    <Content Include="CanvasContent\css\style.css" />
+    <Content Include="CanvasContent\js\stats.min.js" />
+    <Content Include="CanvasContent\js\tween.js" />
+    <Content Include="CanvasContent\js\util.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Center\portfolio-1.jpg" />
-    <Content Include="Content\Center\portfolio-2.jpg" />
-    <Content Include="Content\Center\portfolio-3.jpg" />
-    <Content Include="Content\Center\portfolio-4.jpg" />
-    <Content Include="Content\Center\portfolio-5.jpg" />
-    <Content Include="Content\Center\portfolio-6.jpg" />
     <Content Include="Content\Center\SmoothScroll.js" />
     <Content Include="Content\Center\style.css" />
     <Content Include="Content\Center\theme-scripts.js" />
     <Content Include="Content\Center\timg %281%29.jpg" />
+    <Content Include="Content\css\404style.css" />
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\images\bg.jpg" />
     <Content Include="Content\images\bg1.jpg" />
+    <Content Include="Content\images\bi.png" />
+    <Content Include="Content\images\click.jpeg" />
+    <Content Include="Content\images\my.jpg" />
+    <Content Include="Content\images\MyTest.jpg" />
+    <Content Include="Content\images\nao.jpg" />
+    <Content Include="Content\images\test.jpg" />
     <Content Include="Content\js\input-field.js" />
     <Content Include="Content\js\jquery-2.2.3.min.js" />
     <Content Include="Content\js\scrolling-nav.js" />
@@ -300,9 +308,12 @@
     <Content Include="Views\Edit\ModifyTopic.cshtml" />
     <Content Include="Views\Edit\ModifyUser.cshtml" />
     <Content Include="Views\Shared\GradeError.cshtml" />
+    <Content Include="Views\Error\LoginError.cshtml" />
+    <Content Include="Views\Error\GradeError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="CanvasContent\img\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>

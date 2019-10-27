@@ -24,7 +24,8 @@
     }
     <div class="content">
         <header class="header">
-            <a class="logo" href=""><i class="icon-header"></i><h1>统测系统</h1></a>
+            
+            <a class="logo" href=""><i class="icon-header"></i><h1><img style="height:26px;width:26px;position:relative;top:3px" src="~/Content/images/bi.png">统测系统</h1></a>
             <div class="header-right">
                 <ul>
                     <li class="msg">
@@ -35,7 +36,7 @@
                         <div class="detail msg-detail">
                             <header>您有新的的消息</header>
                             <ul>
-                                @{ 
+                                @{
                                     foreach (var item in msgList)
                                     {
                                         <li><a>@item.MsgTxt</a></li>
@@ -55,43 +56,45 @@
                     }
                     <li class="profile">
                         <div class="avatar">
-                            <img src="~/HtmlContent/img/avatar.jpg" alt="">
+                            <img src="~/Content/images/my.jpg" alt="">@*~/HtmlContent/img/avatar.jpg*@
                         </div>
                         <span class="user-name">@Name</span>
                         <div class="detail user-detail">
                             <div class="con">
-                                <div class="avatar"><img src="~/HtmlContent/img/avatar.jpg" alt=""></div>
+                                <div class="avatar"><img src="~/Content/images/my.jpg" alt=""></div>
                                 <a class="user-link" href="">@Name</a>
-                                <p>@{
-                                    var G = "";
-                                    if (Grade == 1)
-                                    {
-                                        G = "管理员";
-                                        @G;
-                                    }
-                                    else if (Grade == 2)
-                                    {
-                                        G = "统治者";
-                                        @G;
-                                    }
-                                    else
-                                    {
-                                        G = "用户";
-                                        @G;
-                                    }
-                                }</p>
-                            </div>
-                            <footer class="clearfix">
-                                <a class="fl" href="javaScript:void(0);" onclick="selectUserInfo()">详细信息</a>
-                                <a class="fr" href="/Login/Index">退出</a>
-                            </footer>
+                                <p>
+                                    @{
+                                        var G = "";
+                                        if (Grade == 1)
+                                        {
+                                            G = "管理员";
+                                            @G;
+                                        }
+                                        else if (Grade == 2)
+                                        {
+                                            G = "统治者";
+                                            @G;
+                                        }
+                                        else
+                                        {
+                                            G = "用户";
+                                            @G;
+                                        }
+                                }
+                            </p>
                         </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="header-middle">
-                <a id="pushMenu" class="push-menu" href="javascript:;"><i class="icon-menu"></i></a>
-            </div>
+                        <footer class="clearfix">
+                            <a class="fl" href="javaScript:void(0);" onclick="selectUserInfo()">详细信息</a>
+                            <a class="fr" href="/Login/Index">退出</a>
+                        </footer>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="header-middle">
+            <a id="pushMenu" class="push-menu" href="javascript:;"><i class="icon-menu"></i></a>
+        </div>
         </header>
         <aside class="menu-wrap">
             <ul id="menuList" class="side-menu">

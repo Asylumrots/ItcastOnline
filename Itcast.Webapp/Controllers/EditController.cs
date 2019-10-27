@@ -62,7 +62,7 @@ namespace Itcast.Webapp.Controllers
 
         public ActionResult ModifyUserInfo()
         {
-            GradeVlidate();
+            //GradeVlidate();
             IUserInfoBLL userInfoBLL = new UserInfoManager();
             UserInfo inu = Session["Userinfo"] as UserInfo;
             UserInfo us = userInfoBLL.LoadEntity(u => u.Id == inu.Id).FirstOrDefault();
@@ -86,7 +86,7 @@ namespace Itcast.Webapp.Controllers
 
         public ActionResult ModifyUserPwd()
         {
-            GradeVlidate();
+            //GradeVlidate();
             if (Request["NewPwd"] != Request["NewPwd2"])
             {
                 return Content("<script>alert('两次输入的密码必须一致！');history.go(-1);</script>");//不刷新退回页面
@@ -113,7 +113,7 @@ namespace Itcast.Webapp.Controllers
 
         public ActionResult DelMsg()
         {
-            GradeVlidate();
+            //GradeVlidate();
             int id = Convert.ToInt32(Request["id"]);
             IMsgBLL msgBLL = new MsgManager();
             Msg msg = msgBLL.LoadEntity(u => u.MsgId == id).FirstOrDefault();
@@ -296,21 +296,6 @@ namespace Itcast.Webapp.Controllers
             }
         }
 
-        /// <summary>
-        /// 验证用户权限
-        /// </summary>
-        /// <returns>True return “ok” ： False return “Error”</returns>
-        public ActionResult GradeVlidate()
-        {
-            if (BaseController.grade >= 1)
-            {
-                return Content("ok");
-            }
-            else
-            {
-                Response.Redirect("GradeError");
-                return Content("Error");
-            }
-        }
+        
     }
 }

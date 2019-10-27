@@ -136,19 +136,7 @@ namespace Itcast.Webapp.Controllers
             ViewData["PageCount"] = PageCount;
             return View();
         }
-
-        public ActionResult GradeVlidate()
-        {
-            if (BaseController.grade >= 1)
-            {
-                return Content("ok");
-            }
-            else
-            {
-                Response.Redirect("GradeError");
-                return Content("Error");
-            }
-        }
+        
         public ActionResult TopicManager()
         {
             GradeVlidate();

@@ -22,5 +22,22 @@ namespace Itcast.Webapp.Controllers
             }
             base.OnActionExecuting(filterContext);
         }
+
+        /// <summary>
+        /// 验证用户权限
+        /// </summary>
+        /// <returns>True return “ok” ： False return “Error”</returns>
+        public ActionResult GradeVlidate()
+        {
+            if (BaseController.grade >= 1)
+            {
+                return Content("ok");
+            }
+            else
+            {
+                Response.Redirect("GradeError");
+                return Content("Error");
+            }
+        }
     }
 }
