@@ -48,13 +48,13 @@
                     <div class="f_row-2 last">
                         <input type="text" name="validate" placeholder="验证码" class="input-field" required id="validate" style="width:130px;">
                         <img id="validateImg" src="/Login/showValidate?id=1" style="position:absolute;padding:0px;margin:0px;left:200px;" />
-                        <a href="javaScript:void(0)" style="margin-left:33%;font-size:13px;" id="changeValidate">看不清？换一张</a>
+                        <a href="javaScript:void(0)" style="position:relative;left:32%;font-size:13px;" id="changeValidate">看不清？换一张</a>
                     </div>
                     <div style="color:red;margin-left:36%;display:none" id="loginError"><b id="loginMessage"></b></div>
                     <input class="submit-w3" type="submit" id="btnLogin" value="登录" onclick="Login()">
                     <div class="f_link" style="padding-top:10px">
                         <a href="" class="regTag" id="regTags">没有用户?点此注册</a>
-                        <div style="width:280px;display:inline-block"></div>
+                        <div style="width:70%;display:inline-block"></div>
                         <a href="" class="resetTag">忘记密码?</a>
                     </div>
                 }
@@ -68,7 +68,7 @@
 					</svg>
                 </a>
                 <h3>找回密码</h3>
-                @using (Ajax.BeginForm("sendEmali", new { }, new AjaxOptions() { HttpMethod = "post" }, new { id = "sendForm" }))
+                @using (Ajax.BeginForm("sendEmail", new { }, new AjaxOptions() { HttpMethod = "post" }, new { id = "sendForm" }))
                 {
                     <p style="margin:0px;">我们将发送一封邮件到您的信箱中</p><p>您可以通过此邮件来重置您的密码</p>
                     <div class="f_row last">
@@ -76,7 +76,7 @@
                         <input type="text" name="email" placeholder="Email" class="input-field" required>
                         <u></u>
                     </div>
-                    <button class="btn button submit-w3" id="btnSendEamil" type="submit">
+                    <button class="button submit-w3" id="btnSendEamil" type="submit">
                         <span>发送</span>
                     </button>
                 }

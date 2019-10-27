@@ -99,15 +99,15 @@ namespace Itcast.Webapp.Controllers
         }
 
         //找回密码发送邮件
-        public void sendEmali()
+        public void sendEmail(string emailAddress)
         {
             MailMessage mailMsg = new MailMessage();//两个类，别混了，要引入System.Net这个Assembly
-            mailMsg.From = new MailAddress("2647970236@qq.com", "ZW");//源邮件地址 
-            mailMsg.To.Add(new MailAddress("1773527072@qq.com", "用户"));//目的邮件地址。可以有多个收件人
+            mailMsg.From = new MailAddress("1773527072@qq.com", "统测系统管理员");//源邮件地址 
+            mailMsg.To.Add(new MailAddress(emailAddress, "用户"));//目的邮件地址。可以有多个收件人
             mailMsg.Subject = "找回密码邮件";//发送邮件的标题 
             mailMsg.Body = "您的密码是：";//发送邮件的内容 
             SmtpClient client = new SmtpClient("smtp.qq.com");//smtp.163.com，smtp.qq.com
-            client.Credentials = new NetworkCredential("2647970236@qq.com", "1773527072");
+            client.Credentials = new NetworkCredential("1773527072@qq.com", "123");
             client.Send(mailMsg);
         }
     }
