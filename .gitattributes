@@ -34,7 +34,7 @@
 #*.modelproj merge=binary
 #*.sqlproj   merge=binary
 #*.wwaproj   merge=binary
-*.html linguist-language=C#
+*.html linguist-language=ASP
 
 ###############################################################################
 # behavior for image files
