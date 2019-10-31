@@ -186,6 +186,7 @@
     <Content Include="Content\images\MyTest.jpg" />
     <Content Include="Content\images\nao.jpg" />
     <Content Include="Content\images\test.jpg" />
+    <Content Include="Content\images\备案图标.png" />
     <Content Include="Content\js\input-field.js" />
     <Content Include="Content\js\jquery-2.2.3.min.js" />
     <Content Include="Content\js\scrolling-nav.js" />

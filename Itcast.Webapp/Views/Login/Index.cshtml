@@ -115,6 +115,11 @@
             &copy; 2019 Login & Register Forms. All rights reserved | Design by ZW
             <br />
             友情链接：<a href="http://47.102.210.25:50">新闻系统</a>
+            <br />
+            <a href="http://www.beian.miit.gov.cn/" style="font-size:10px;color:white">
+                <img src="~/Content/images/备案图标.png" height="12" width="12"/>
+                鄂ICP备19026554号
+            </a>
         </h2>
     </div>
     <!-- //copyright -->
@@ -139,7 +144,8 @@
                 Request[str.split("=")[0]] = (str.split("=")[1]);
             }
             if (Request["id"] != null) {
-                document.getElementById("userName").value = Request["id"];
+                
+                document.getElementById("userName").value = decodeURI(Request["id"]);
             }
 
             document.getElementById("changeValidate").onclick = function () {
@@ -203,7 +209,7 @@
         function afterRegister(data) {
             if (data == "registerYes") {
                 $("#btnRegister").val("注册成功，正在跳转登录...");
-                window.location.href = "/Login/Index?id=" + document.getElementById("registerUserName").value;
+                window.location.href = "/Login/Index?id=" + encodeURI(document.getElementById("registerUserName").value);
             }
             else if (data == "registerNo") {
                 $("#registerError").show();
