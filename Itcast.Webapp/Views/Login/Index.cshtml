@@ -134,6 +134,14 @@
     <!-- password-script -->
     <script>
         window.onload = function () {
+            //对于手机端访问提示消息
+            function browserRedirect() {
+                var sUserAgent = navigator.userAgent.toLowerCase();
+                if (/ipad|iphone|midp|rv:1.2.3.4|ucweb|android|windows ce|windows mobile/.test(sUserAgent)) {
+                    alert("移动端尚未适配，页面显示会有些问题，建议使用PC访问");
+                }
+            }
+            browserRedirect();
             document.getElementById("password1").onchange = validatePassword;
             document.getElementById("password2").onchange = validatePassword;
             //js中处理路由问号传参获取值
