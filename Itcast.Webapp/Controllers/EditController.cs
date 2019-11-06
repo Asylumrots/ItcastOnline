@@ -265,9 +265,19 @@ namespace Itcast.Webapp.Controllers
             int id = Convert.ToInt32(Request["id"]);
             IUserInfoBLL userInfoBLL = new UserInfoManager();
             UserInfo user = userInfoBLL.LoadEntity(u => u.Id == id).FirstOrDefault();
+            if (Request["UserName"]==""|| Request["RegTime"]=="" || Request["UserGrade"]=="")
+            {
+                return Content("<script>alert('修改的数据不能为空！');history.go(-1);</script>");//不刷新退回页面
+            }
+            if (Request["UserSex"] != "")
+            {
+                user.Sex = Request["UserSex"];
+            }
+            if (Request["UserAge"] != "")
+            {
+                user.Sex = Request["UserAge"];
+            }
             user.Name = Request["UserName"];
-            user.Sex = Request["UserSex"];
-            user.Age = Convert.ToInt32(Request["UserAge"]);
             user.RegTime = Convert.ToDateTime(Request["RegTime"]);
             user.Grade = Convert.ToInt32(Request["UserGrade"]);
             if (userInfoBLL.ModifyEntity(user))
