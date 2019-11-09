@@ -12,20 +12,24 @@ namespace Itcast.Webapp.Controllers
 {
     public class LoginController : Controller
     {
-        // GET: Login
+        //Login视图
         public ActionResult Index()
         {
-            //清空Session
+            //清空用户Session
             Session["Userinfo"] = null;
             return View();
         }
 
-        //用户登陆
+        /// <summary>
+        /// 用户登录
+        /// </summary>
+        /// <returns>登录结果或验证码错误</returns>
         public ActionResult UserLogin()
         {
             if (Request["validate"] == Session["validateCode"].ToString())
             {
                 string name = Request["name"];
+                //DM5加密密码
                 string pwd = GetMd5.Get(Request["password"].ToString());
                 //BLL.UserInfoManager userManager = new BLL.UserInfoManager();
                 //UserInfo us = userManager.GetUserInfo(name, pwd);
@@ -52,7 +56,10 @@ namespace Itcast.Webapp.Controllers
 
         }
 
-        //用户注册
+        /// <summary>
+        /// 用户注册
+        /// </summary>
+        /// <returns>注册结果</returns>
         public ActionResult UserRegister()
         {
             //BLL.UserInfoManager userManager = new BLL.UserInfoManager();
@@ -87,7 +94,10 @@ namespace Itcast.Webapp.Controllers
             }
         }
 
-        //获取验证码
+        /// <summary>
+        /// 获取验证码
+        /// </summary>
+        /// <returns>验证码图片</returns>
         public ActionResult showValidate()
         {
             ValidateCode validate = new ValidateCode();
@@ -98,8 +108,12 @@ namespace Itcast.Webapp.Controllers
 
         }
 
-        //找回密码发送邮件
-        public void sendEmail(string emailAddress)
+        /// <summary>
+        /// 找回密码邮件发送
+        /// </summary>
+        /// <param name="emailAddress">邮箱地址</param>
+        /// <returns>是否发送成功</returns>
+        public bool sendEmail(string emailAddress)
         {
             MailMessage mailMsg = new MailMessage();//两个类，别混了，要引入System.Net这个Assembly
             mailMsg.From = new MailAddress("zw@zhangfive.cn", "统测系统管理员");//源邮件地址 
@@ -109,6 +123,7 @@ namespace Itcast.Webapp.Controllers
             SmtpClient client = new SmtpClient("smtp.qq.com");//smtp.163.com，smtp.qq.com
             client.Credentials = new NetworkCredential("zw@zhangfive.cn", "");
             client.Send(mailMsg);
+            return true;
         }
     }
 }

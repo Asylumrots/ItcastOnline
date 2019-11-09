@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Itcast.Common;
+using Itcast.Webapp.FilterAttribute;
 
 namespace Itcast.Webapp.Controllers
 {
@@ -15,15 +16,15 @@ namespace Itcast.Webapp.Controllers
     {
         // GET: Edit
         //统测视图
+        [GradeFilter]
         public ActionResult Test()
         {
-            GradeVlidate();
             return View();
         }
 
+        [GradeFilter]
         public ActionResult AddTest()
         {
-            GradeVlidate();
             ITestBLL testBLL = new TestManager();
             Test test = new Test();
             test.TestName = Request["TestName"];
@@ -44,9 +45,9 @@ namespace Itcast.Webapp.Controllers
             }
         }
 
+        [GradeFilter]
         public ActionResult DelTest()
         {
-            GradeVlidate();
             ITestBLL testBLL = new TestManager();
             var id = Convert.ToInt32(Request["id"]);
             Test test = testBLL.LoadEntity(u => u.TestId == id).FirstOrDefault();
@@ -62,7 +63,6 @@ namespace Itcast.Webapp.Controllers
 
         public ActionResult ModifyUserInfo()
         {
-            //GradeVlidate();
             IUserInfoBLL userInfoBLL = new UserInfoManager();
             UserInfo inu = Session["Userinfo"] as UserInfo;
             UserInfo us = userInfoBLL.LoadEntity(u => u.Id == inu.Id).FirstOrDefault();
@@ -86,7 +86,6 @@ namespace Itcast.Webapp.Controllers
 
         public ActionResult ModifyUserPwd()
         {
-            //GradeVlidate();
             if (Request["NewPwd"] != Request["NewPwd2"])
             {
                 return Content("<script>alert('两次输入的密码必须一致！');history.go(-1);</script>");//不刷新退回页面
@@ -113,7 +112,6 @@ namespace Itcast.Webapp.Controllers
 
         public ActionResult DelMsg()
         {
-            //GradeVlidate();
             int id = Convert.ToInt32(Request["id"]);
             IMsgBLL msgBLL = new MsgManager();
             Msg msg = msgBLL.LoadEntity(u => u.MsgId == id).FirstOrDefault();
@@ -127,9 +125,9 @@ namespace Itcast.Webapp.Controllers
             }
         }
 
+        [GradeFilter]
         public ActionResult SendMsg()
         {
-            GradeVlidate();
             string name = Request["SendName"];
             string txt = Request["SendTxt"];
             if (name.Equals("*"))
@@ -170,15 +168,15 @@ namespace Itcast.Webapp.Controllers
         }
 
         //视图
+        [GradeFilter]
         public ActionResult AddTopic()
         {
-            GradeVlidate();
             return View();
         }
 
+        [GradeFilter]
         public ActionResult AddTopicMethod()
         {
-            GradeVlidate();
             Topic topic = new Topic();
             topic.TopicID = Convert.ToInt32(Request["TopicId"]);
             topic.Title = Request["TopicTitle"];
@@ -199,9 +197,9 @@ namespace Itcast.Webapp.Controllers
             }
         }
 
+        [GradeFilter]
         public ActionResult DelTopicMethod()
         {
-            GradeVlidate();
             int id = Convert.ToInt32(Request["id"]);
             ITopicBLL topicBLL = new TopicManager();
             Topic topic = topicBLL.LoadEntity(u => u.TopicID == id).FirstOrDefault();
@@ -216,9 +214,9 @@ namespace Itcast.Webapp.Controllers
         }
 
         //修改试题的视图
+        [GradeFilter]
         public ActionResult ModifyTopic()
         {
-            GradeVlidate();
             int id = Convert.ToInt32(Request["id"]);
             ITopicBLL topicBLL = new TopicManager();
             Topic topic = topicBLL.LoadEntity(u => u.TopicID == id).FirstOrDefault();
@@ -226,9 +224,9 @@ namespace Itcast.Webapp.Controllers
             return View();
         }
 
+        [GradeFilter]
         public ActionResult ModifyTopicMethod()
         {
-            GradeVlidate();
             int id = Convert.ToInt32(Request["id"]);
             ITopicBLL topicBLL = new TopicManager();
             Topic topic = topicBLL.LoadEntity(u => u.TopicID == id).FirstOrDefault();
@@ -249,9 +247,9 @@ namespace Itcast.Webapp.Controllers
             }
         }
 
+        [GradeFilter]
         public ActionResult ModifyUser()
         {
-            GradeVlidate();
             int id = Convert.ToInt32(Request["id"]);
             IUserInfoBLL userInfoBLL = new UserInfoManager();
             UserInfo user = userInfoBLL.LoadEntity(u => u.Id == id).FirstOrDefault();
@@ -259,9 +257,9 @@ namespace Itcast.Webapp.Controllers
             return View();
         }
 
+        [GradeFilter]
         public ActionResult ModifyUserMethod()
         {
-            GradeVlidate();
             int id = Convert.ToInt32(Request["id"]);
             IUserInfoBLL userInfoBLL = new UserInfoManager();
             UserInfo user = userInfoBLL.LoadEntity(u => u.Id == id).FirstOrDefault();
@@ -290,9 +288,9 @@ namespace Itcast.Webapp.Controllers
             }
         }
 
+        [GradeFilter]
         public ActionResult DelUserMethod()
         {
-            GradeVlidate();
             int id = Convert.ToInt32(Request["id"]);
             IUserInfoBLL userInfoBLL = new UserInfoManager();
             UserInfo us = userInfoBLL.LoadEntity(u => u.Id == id).FirstOrDefault();

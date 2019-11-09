@@ -53,6 +53,7 @@
                         var Name = us.Name;
                         var Id = us.Id;
                         var Grade = us.Grade;
+                        string thistitle = "";
                     }
                     <li class="profile">
                         <div class="avatar">
@@ -81,7 +82,7 @@
                                             G = "用户";
                                             @G;
                                         }
-                                }
+                                    }
                             </p>
                         </div>
                         <footer class="clearfix">
@@ -105,7 +106,20 @@
                     <a data-type="tab" title="统测" href="/Home/Test" id="Test"><i class="icon-bookmark"></i><span>统测</span></a>
                 </li>
                 <li>
-                    <a data-type="tab" title="测试&管理" href="/Home/MyTest" id="MyTest"><i class="icon-resize-full-alt"></i><span>测试&管理</span></a>
+                    <a data-type="tab" title="
+                       @{  
+                           if (Grade >= 1)
+                           {
+                               thistitle = "测试&管理";
+                                @thistitle;
+                           }
+                           else
+                           {
+                               thistitle = "自我测试";
+                                @thistitle;
+                           }
+                        }
+                       " href="/Home/MyTest" id="MyTest"><i class="icon-resize-full-alt"></i><span>@thistitle</span></a>
                 </li>
                 <li>
                     <a data-type="tab" title="题目一览" href="/Home/TopicInfo" id="TopicInfo"><i class="icon-font"></i><span>题目一览</span></a>

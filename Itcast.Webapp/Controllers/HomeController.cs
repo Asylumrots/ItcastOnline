@@ -9,6 +9,7 @@ using System.IO;
 using System.Web.Script.Serialization;
 using Newtonsoft.Json;
 using Itcast.IBLL;
+using Itcast.Webapp.FilterAttribute;
 
 namespace Itcast.Webapp.Controllers
 {
@@ -137,9 +138,9 @@ namespace Itcast.Webapp.Controllers
             return View();
         }
         
+        [GradeFilter]
         public ActionResult TopicManager()
         {
-            GradeVlidate();
             ItcastEntities db = new ItcastEntities();
             //分页显示数据
             int pageIndex;
