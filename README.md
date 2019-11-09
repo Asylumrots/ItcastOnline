@@ -8,9 +8,18 @@
 
 目前版本为 v1.2
 
-##项目目录
+## 项目目录
 
-DALFactory>AbstractFactory 通过抽象工厂封装了类的实例的创建，业务层可以通过会话层来直接获取操作类的实例，实现两层的连接耦合。
+``` 目录>
+Itcast.BLL 逻辑控制  
+Itcast.Common 工具类  
+Itcast.DAL 数据访问  
+Itcast.DALFactory > AbstractFactory.cs 通过抽象工厂封装了类的实例的创建，业务层可以通过会话层来直接获取操作类的实例，实现两层的连接耦合。  
+Itcast.IBLL 逻辑控制接口  
+Itcast.IDAL 数据访问接口  
+Itcast.Model EF数据 
+Itcast.Webapp 网站   
+```
 
 ## 浏览器支持
 
