@@ -1,6 +1,6 @@
 # ItcastOnline
 
->这是个是一个在线测试系统，可以进行在线统测，自我测试等基础功能。  
+>这是一个在线测试系统，可以进行在线统测，自我测试等基础功能。  
 
 基于ASP.NET MVC（目标框架.NET Framework 4.5.2） + Entity Framework（版本：6.1.3）  
    
