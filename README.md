@@ -2,9 +2,11 @@
 
 >这是个是一个在线测试系统，可以进行在线统测，自我测试等基础功能。  
 
-基于ASP.NET MVC（目标框架.NET Framework 4.5.2） + Entity Framework（版本：6.1.3）   
-在线访问：[线上地址](http://zhangfive.cn)    
-目前版本为v1.2   
+基于ASP.NET MVC（目标框架.NET Framework 4.5.2） + Entity Framework（版本：6.1.3）  
+   
+在线访问：[线上地址](http://zhangfive.cn)  
+
+目前版本为 v1.2
 
 ##项目目录
 
