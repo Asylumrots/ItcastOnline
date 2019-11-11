@@ -42,6 +42,6 @@ Itcast.Webapp 网站
 
 ## 许可
 
-[MIT](https://github.com/Asylumrots/ItcastOnline) license.
+[MIT license](https://github.com/Asylumrots/ItcastOnline)
 
 Copyright (c) 2019-present Asylumrots
