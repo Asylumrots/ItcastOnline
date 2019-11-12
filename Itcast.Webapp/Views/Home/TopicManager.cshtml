@@ -54,26 +54,26 @@
                     <td class="col-md-1">操作</td>
                 </tr>
                 @{
-            foreach (var item in Model)
-            {
-                <tr class="">
-                    <td>@item.TopicID</td>
-                    <td>@item.Title</td>
-                    <td>@item.AnswerA</td>
-                    <td>@item.AnswerB</td>
-                    <td>@item.AnswerC</td>
-                    <td>@item.AnswerD</td>
-                    <td>@item.Answer</td>
-                    <td>
-                        <a href="/Edit/ModifyTopic?id=@item.TopicID">
-                            <input type="button" class="btn btn-warning" value="修改">
-                        </a>
-                        <a href="/Edit/DelTopicMethod?id=@item.TopicID">
-                            <input type="button" class="btn btn-danger" value="删除" onclick="return confirm('您确认要删除此试题?')">
-                        </a>
-                    </td>
-                </tr>
-                }
+                    foreach (var item in Model)
+                    {
+                        <tr class="">
+                            <td>@item.TopicID</td>
+                            <td>@item.Title</td>
+                            <td>@item.AnswerA</td>
+                            <td>@item.AnswerB</td>
+                            <td>@item.AnswerC</td>
+                            <td>@item.AnswerD</td>
+                            <td>@item.Answer</td>
+                            <td>
+                                <a href="/Edit/ModifyTopic?id=@item.TopicID">
+                                    <input type="button" class="btn btn-warning" value="修改">
+                                </a>
+                                <a href="/Edit/DelTopicMethod?id=@item.TopicID">
+                                    <input type="button" class="btn btn-danger" value="删除" onclick="return confirm('您确认要删除此试题?')">
+                                </a>
+                            </td>
+                        </tr>
+                    }
                 }
             </table>
             <div style="margin-left:33%">

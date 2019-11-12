@@ -15,13 +15,20 @@ namespace Itcast.Webapp.Controllers
     public class EditController : BaseController
     {
         // GET: Edit
-        //统测视图
+        /// <summary>
+        /// 添加统测视图
+        /// </summary>
+        /// <returns></returns>
         [GradeFilter]
         public ActionResult Test()
         {
             return View();
         }
 
+        /// <summary>
+        /// 添加统测
+        /// </summary>
+        /// <returns></returns>
         [GradeFilter]
         public ActionResult AddTest()
         {
@@ -45,6 +52,10 @@ namespace Itcast.Webapp.Controllers
             }
         }
 
+        /// <summary>
+        /// 删除统测
+        /// </summary>
+        /// <returns></returns>
         [GradeFilter]
         public ActionResult DelTest()
         {
@@ -61,6 +72,10 @@ namespace Itcast.Webapp.Controllers
             }
         }
 
+        /// <summary>
+        /// 修改用户信息
+        /// </summary>
+        /// <returns></returns>
         public ActionResult ModifyUserInfo()
         {
             IUserInfoBLL userInfoBLL = new UserInfoManager();
@@ -70,9 +85,20 @@ namespace Itcast.Webapp.Controllers
             //us.Name = inu.Name;
             //us.Grade = inu.Grade;
             //us.RegTime = inu.RegTime;
-            us.Sex = Request["sex"];
-            us.Age = Convert.ToInt32(Request["age"]);
-            us.Email = Request["email"];
+            if (Request["sex"] != "")
+            {
+                us.Sex = Request["sex"];
+            }
+            if (Request["age"] != "")
+            {
+                us.Age = Convert.ToInt32(Request["age"]);
+            }
+            //us.Sex = Request["sex"];
+            //us.Age = Convert.ToInt32(Request["age"]);
+            if (Request["email"]!=null)
+            {
+                us.Email = Request["email"];
+            }
             if (userInfoBLL.ModifyEntity(us))
             {
                 Session["Userinfo"] = us;
@@ -84,6 +110,10 @@ namespace Itcast.Webapp.Controllers
             }
         }
 
+        /// <summary>
+        /// 修改用户密码
+        /// </summary>
+        /// <returns></returns>
         public ActionResult ModifyUserPwd()
         {
             if (Request["NewPwd"] != Request["NewPwd2"])
@@ -110,6 +140,10 @@ namespace Itcast.Webapp.Controllers
             return Content("<script>alert('系统繁忙！');history.go(-1);</script>");//不刷新退回页面
         }
 
+        /// <summary>
+        /// 删除信息
+        /// </summary>
+        /// <returns></returns>
         public ActionResult DelMsg()
         {
             int id = Convert.ToInt32(Request["id"]);
@@ -125,7 +159,10 @@ namespace Itcast.Webapp.Controllers
             }
         }
 
-        [GradeFilter]
+        /// <summary>
+        /// 发送信息
+        /// </summary>
+        /// <returns></returns>
         public ActionResult SendMsg()
         {
             string name = Request["SendName"];
@@ -167,13 +204,20 @@ namespace Itcast.Webapp.Controllers
             }
         }
 
-        //视图
+        /// <summary>
+        /// 添加试题视图
+        /// </summary>
+        /// <returns></returns>
         [GradeFilter]
         public ActionResult AddTopic()
         {
             return View();
         }
 
+        /// <summary>
+        /// 添加试题
+        /// </summary>
+        /// <returns></returns>
         [GradeFilter]
         public ActionResult AddTopicMethod()
         {
@@ -197,6 +241,10 @@ namespace Itcast.Webapp.Controllers
             }
         }
 
+        /// <summary>
+        /// 删除试题
+        /// </summary>
+        /// <returns></returns>
         [GradeFilter]
         public ActionResult DelTopicMethod()
         {
@@ -213,7 +261,10 @@ namespace Itcast.Webapp.Controllers
             }
         }
 
-        //修改试题的视图
+        /// <summary>
+        /// 修改试题的视图
+        /// </summary>
+        /// <returns></returns>
         [GradeFilter]
         public ActionResult ModifyTopic()
         {
@@ -224,6 +275,10 @@ namespace Itcast.Webapp.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 修改试题
+        /// </summary>
+        /// <returns></returns>
         [GradeFilter]
         public ActionResult ModifyTopicMethod()
         {
@@ -247,6 +302,10 @@ namespace Itcast.Webapp.Controllers
             }
         }
 
+        /// <summary>
+        /// 高权限修改用户视图
+        /// </summary>
+        /// <returns></returns>
         [GradeFilter]
         public ActionResult ModifyUser()
         {
@@ -257,6 +316,10 @@ namespace Itcast.Webapp.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 高权限修改用户信息
+        /// </summary>
+        /// <returns></returns>
         [GradeFilter]
         public ActionResult ModifyUserMethod()
         {
@@ -288,6 +351,10 @@ namespace Itcast.Webapp.Controllers
             }
         }
 
+        /// <summary>
+        /// 删除用户
+        /// </summary>
+        /// <returns></returns>
         [GradeFilter]
         public ActionResult DelUserMethod()
         {

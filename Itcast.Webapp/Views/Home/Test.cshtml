@@ -93,12 +93,12 @@
                                 <a href="/Exam/Index?id=@item.TestId" target="_parent" class="@into">
                                     <input type="button" class="@btncss" value="@text">
                                 </a>
+                                <a href="/Exam/Score?id=@item.TestId" target="_blank">
+                                    <input type="button" class="btn btn-primary" value="查看成绩">
+                                </a>
                                 @{
                                     if (us.Grade >= 1)
                                     {
-                                        <a href="/Exam/Score?id=@item.TestId" target="_blank">
-                                            <input type="button" class="btn btn-primary" value="查看成绩">
-                                        </a>
                                         <a href="/Edit/DelTest?id=@item.TestId">
                                             <input type="button" class="btn btn-danger" value="删除" onclick="return confirm('您确认要删除此次统测?')">
                                         </a>

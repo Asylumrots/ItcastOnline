@@ -19,12 +19,12 @@
     <script src="~/Content/js/jquery-2.2.3.min.js"></script>
 </head>
 <body>
-    @{ 
+    @{
         IQueryable<Msg> msgList = ViewData["Msg"] as IQueryable<Msg>;
     }
     <div class="content">
         <header class="header">
-            
+
             <a class="logo" href=""><i class="icon-header"></i><h1><img style="height:26px;width:26px;position:relative;top:3px" src="~/Content/images/bi.png">统测系统</h1></a>
             <div class="header-right">
                 <ul>
@@ -83,19 +83,19 @@
                                             @G;
                                         }
                                     }
-                            </p>
+                                </p>
+                            </div>
+                            <footer class="clearfix">
+                                <a class="fl" href="javaScript:void(0);" onclick="selectUserInfo()">详细信息</a>
+                                <a class="fr" href="/Login/Index">退出</a>
+                            </footer>
                         </div>
-                        <footer class="clearfix">
-                            <a class="fl" href="javaScript:void(0);" onclick="selectUserInfo()">详细信息</a>
-                            <a class="fr" href="/Login/Index">退出</a>
-                        </footer>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div class="header-middle">
-            <a id="pushMenu" class="push-menu" href="javascript:;"><i class="icon-menu"></i></a>
-        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="header-middle">
+                <a id="pushMenu" class="push-menu" href="javascript:;"><i class="icon-menu"></i></a>
+            </div>
         </header>
         <aside class="menu-wrap">
             <ul id="menuList" class="side-menu">
@@ -107,7 +107,7 @@
                 </li>
                 <li>
                     <a data-type="tab" title="
-                       @{  
+                       @{
                            if (Grade >= 1)
                            {
                                thistitle = "测试&管理";
@@ -138,189 +138,190 @@
                         </li>
                     </ul>
                 </li>
-                <li>@*icon-attach*@
-                    <a title="退出登陆" href="/Login/Index"><i class="icon-attach"></i><span>退出登陆</span></a>
-                </li>
-            </ul>
-        </aside>
-        <div id="main" class="main">
-            <nav class="nav">
-                <ul id="nav" class="menu-tabs"></ul>
-            </nav>
-            <div class="page-con"></div>
-        </div>
-        <footer class="footer">
-            <p>copyright &copy; 2019 <a href="">WU Zhang</a></p>
-        </footer>
+                <li>
+                    @*icon-attach*@
+                <a title="退出登陆" href="/Login/Index"><i class="icon-attach"></i><span>退出登陆</span></a>
+            </li>
+        </ul>
+    </aside>
+    <div id="main" class="main">
+        <nav class="nav">
+            <ul id="nav" class="menu-tabs"></ul>
+        </nav>
+        <div class="page-con"></div>
     </div>
-    <script src="~/HtmlContent/lib/jquery.min.js"></script>
-    <script>
-            var $nav = $('#nav'),
-            $navParent = $nav.parent(),
-            lh = $('#menuList').find('li').first().height();
+    <footer class="footer">
+        <p>copyright &copy; 2019 <a href="">WU Zhang</a></p>
+    </footer>
+</div>
+<script src="~/HtmlContent/lib/jquery.min.js"></script>
+<script>
+    var $nav = $('#nav'),
+        $navParent = $nav.parent(),
+        lh = $('#menuList').find('li').first().height();
 
-        // 导航栏隐藏／显示
-        $('#pushMenu').on('click', function () {
-            $('.content').toggleClass('hide-nav');
-            setTabWidth();
-        });
+    // 导航栏隐藏／显示
+    $('#pushMenu').on('click', function () {
+        $('.content').toggleClass('hide-nav');
+        setTabWidth();
+    });
 
-        //存在则激活tab, 否则新建tab
-        function clickMenu(url, txt) {
-            var i = -1;
-            $nav.find('li').each(function (index, el) {
-                if ($(this).attr('data-txt') == txt) {
-                    i = index;
-                    return false;
-                }
-            });
-            if (i > -1) {
-                selectTab(i);
-            } else {
-                appendTab(txt);
-                appendPage(url);
+    //存在则激活tab, 否则新建tab
+    function clickMenu(url, txt) {
+        var i = -1;
+        $nav.find('li').each(function (index, el) {
+            if ($(this).attr('data-txt') == txt) {
+                i = index;
+                return false;
             }
-        }
-        //添加页面
-        function appendPage(url) {
-            $('.page-con .page').removeClass('active');
-            $('.page-con').append('<div class="page active"><iframe src="' + url + '" frameborder="0" width="100%" height="100%"></iframe></div>');
-        }
-
-        //添加tab
-        function appendTab(txt) {
-            $nav.find('li').removeClass('active');
-            $nav.append('<li data-txt="' + txt + '" class="active"><a href="javascript:;">' + txt + '<i class="close">×</i></a></li>');
-            var w = setTabWidth();
-            //移动到新增tab
-            $navParent.animate({ 'scrollLeft': w + 'px' }, 600);
-        }
-
-        //选择下一个tab
-        function selectNext(i) {
-            var len = $nav.find('li').length;
-            if (len <= 1) return;
-            selectTab(i > 0 ? i - 1 : i + 1);
-        }
-
-        //选择tab
-        function selectTab(index) {
-            var selTab = $nav.find('li').eq(index),
-                selTabLeft = selTab.position().left,
-                tabWrapWidth = $navParent.width();
-
-            selTab.addClass('active').siblings('.active').removeClass('active');
-            $('.page-con .page').eq(index).addClass('active').siblings('.active').removeClass('active');
-
-            //不在tab栏显示范围则滚动到可视范围内
-            if (selTabLeft < 0 || selTabLeft > tabWrapWidth) {
-                $navParent.animate({ scrollLeft: selTabLeft }, 600);
-            }
-        }
-
-        // 选择导航菜单
-        $('#menuList').on('click', 'a', function (e) {
-            var $li = $(this).parent(),
-                cul = $li.find('ul');
-
-            if ($(this).attr('data-type') != 'tab') return;
-            e.preventDefault();
-
-            //有子菜单
-            if ($li.hasClass('children')) {
-                if ($li.hasClass('active')) {
-                    $li.removeClass('active');
-                    cul.css('height', 0);
-                    return;
-                } else {
-                    var h = cul.find('li').length * lh;
-                    cul.css('height', h + 'px');
-                }
-            }
-
-            $li.addClass('active').siblings('.active').removeClass('active');
-            if ($li.hasClass('children')) return;
-            var url = $(this).attr('href'),
-                txt = $.trim($(this).attr('title'));
-            clickMenu(url, txt);
         });
+        if (i > -1) {
+            selectTab(i);
+        } else {
+            appendTab(txt);
+            appendPage(url);
+        }
+    }
+    //添加页面
+    function appendPage(url) {
+        $('.page-con .page').removeClass('active');
+        $('.page-con').append('<div class="page active"><iframe src="' + url + '" frameborder="0" width="100%" height="100%"></iframe></div>');
+    }
 
-        // 选择tab
-        $nav.on('click', 'li', function () {
-            if ($(this).hasClass('active')) return;
-            var index = $(this).index();
-            selectTab(index);
-        });
+    //添加tab
+    function appendTab(txt) {
+        $nav.find('li').removeClass('active');
+        $nav.append('<li data-txt="' + txt + '" class="active"><a href="javascript:;">' + txt + '<i class="close">×</i></a></li>');
+        var w = setTabWidth();
+        //移动到新增tab
+        $navParent.animate({ 'scrollLeft': w + 'px' }, 600);
+    }
 
-        // 关闭tab
-        $nav.on('click', '.close', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            var $li = $(this).parent().parent(),
-                index = $li.index();
+    //选择下一个tab
+    function selectNext(i) {
+        var len = $nav.find('li').length;
+        if (len <= 1) return;
+        selectTab(i > 0 ? i - 1 : i + 1);
+    }
+
+    //选择tab
+    function selectTab(index) {
+        var selTab = $nav.find('li').eq(index),
+            selTabLeft = selTab.position().left,
+            tabWrapWidth = $navParent.width();
+
+        selTab.addClass('active').siblings('.active').removeClass('active');
+        $('.page-con .page').eq(index).addClass('active').siblings('.active').removeClass('active');
+
+        //不在tab栏显示范围则滚动到可视范围内
+        if (selTabLeft < 0 || selTabLeft > tabWrapWidth) {
+            $navParent.animate({ scrollLeft: selTabLeft }, 600);
+        }
+    }
+
+    // 选择导航菜单
+    $('#menuList').on('click', 'a', function (e) {
+        var $li = $(this).parent(),
+            cul = $li.find('ul');
+
+        if ($(this).attr('data-type') != 'tab') return;
+        e.preventDefault();
+
+        //有子菜单
+        if ($li.hasClass('children')) {
             if ($li.hasClass('active')) {
-                selectNext(index);
+                $li.removeClass('active');
+                cul.css('height', 0);
+                return;
+            } else {
+                var h = cul.find('li').length * lh;
+                cul.css('height', h + 'px');
             }
-            $li.remove();
-            $('.page-con .page').eq(index).remove();
-            setTabWidth();
+        }
+
+        $li.addClass('active').siblings('.active').removeClass('active');
+        if ($li.hasClass('children')) return;
+        var url = $(this).attr('href'),
+            txt = $.trim($(this).attr('title'));
+        clickMenu(url, txt);
+    });
+
+    // 选择tab
+    $nav.on('click', 'li', function () {
+        if ($(this).hasClass('active')) return;
+        var index = $(this).index();
+        selectTab(index);
+    });
+
+    // 关闭tab
+    $nav.on('click', '.close', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $li = $(this).parent().parent(),
+            index = $li.index();
+        if ($li.hasClass('active')) {
+            selectNext(index);
+        }
+        $li.remove();
+        $('.page-con .page').eq(index).remove();
+        setTabWidth();
+    });
+
+    //设置导航列表宽度
+    function setTabWidth() {
+        var w = 0;
+        var pw = $navParent.width();
+        $nav.find('li').each(function (i, item) {
+            w += $(item).outerWidth(true);
         });
+        w = Math.max(w + 10, pw);
+        $nav.css('width', w + 'px');
+        return w;
+    }
 
-        //设置导航列表宽度
-        function setTabWidth() {
-            var w = 0;
-            var pw = $navParent.width();
-            $nav.find('li').each(function (i, item) {
-                w += $(item).outerWidth(true);
-            });
-            w = Math.max(w + 10, pw);
-            $nav.css('width', w + 'px');
-            return w;
+    function setWidth() {
+        var winWidth = $(window).width();
+        if (winWidth < 769) {
+            $('.content').addClass('hide-nav');
         }
+    }
 
-        function setWidth() {
-            var winWidth = $(window).width();
-            if (winWidth < 769) {
-                $('.content').addClass('hide-nav');
-            }
+    //设置高度
+    function setHeight() {
+        var winHeight = $(window).height(),
+            headerHeight = $('.header').height(),
+            footerHeight = $('.footer').height(),
+            navHeight = $('.nav').outerHeight();
+        $('.page-con').height(winHeight - headerHeight - navHeight - footerHeight);
+    }
+    function windowResize() {
+        setHeight();
+        setTabWidth();
+        setWidth();
+    }
+    windowResize();
+    $(window).on('resize', windowResize);
+    //选择第一项
+    $('#menuList a').eq(0).click();
+    function selectTest() { $('#menuList a').eq(1).click(); }
+    function selectMyTest() { $('#menuList a').eq(2).click(); }
+    function selectTopic() { $('#menuList a').eq(3).click(); }
+    function selectUserInfo() { $('#menuList a').eq(4).click(); $('#menuList a').eq(5).click(); }
+    function selectMsg() { $('#menuList a').eq(4).click(); $('#menuList a').eq(6).click(); }
+    function selectSecurity() { $('#menuList a').eq(4).click(); $('#menuList a').eq(7).click(); }
+</script>
+@*@{
+        var view = Request["view"];
+        if (view == null) {
+            Response.Write("<script>var select=0;</script>");
         }
-
-        //设置高度
-        function setHeight() {
-            var winHeight = $(window).height(),
-                headerHeight = $('.header').height(),
-                footerHeight = $('.footer').height(),
-                navHeight = $('.nav').outerHeight();
-            $('.page-con').height(winHeight - headerHeight - navHeight - footerHeight);
-        }
-        function windowResize() {
-            setHeight();
-            setTabWidth();
-            setWidth();
-        }
-        windowResize();
-        $(window).on('resize', windowResize);
-        //选择第一项
-        $('#menuList a').eq(0).click();
-        function selectTest() { $('#menuList a').eq(1).click(); }
-        function selectMyTest() { $('#menuList a').eq(2).click(); }
-        function selectTopic() { $('#menuList a').eq(3).click(); }
-        function selectUserInfo() { $('#menuList a').eq(4).click();$('#menuList a').eq(5).click(); }
-        function selectMsg() { $('#menuList a').eq(4).click();$('#menuList a').eq(6).click(); }
-        function selectSecurity() { $('#menuList a').eq(4).click();$('#menuList a').eq(7).click(); }
-    </script>
-    @*@{ 
-            var view = Request["view"];
-            if (view == null) {
-                Response.Write("<script>var select=0;</script>");
-            }
-            else
+        else
+        {
+            if (view.Equals("2"))
             {
-                if (view.Equals("2"))
-                {
-                    Response.Write("<script>var select=1;</script>");
-                }
+                Response.Write("<script>var select=1;</script>");
             }
-        }*@
+        }
+    }*@
 </body>
 </html>

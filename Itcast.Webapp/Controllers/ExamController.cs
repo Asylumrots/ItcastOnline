@@ -1,6 +1,7 @@
 ﻿using Itcast.BLL;
 using Itcast.IBLL;
 using Itcast.Model;
+using Itcast.Webapp.FilterAttribute;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,19 +45,10 @@ namespace Itcast.Webapp.Controllers
         //查看分数
         public ActionResult Score()
         {
-            if (BaseController.grade >= 1)
-            {
-                IMarkBLL markBLL = new MarkManager();
-                int id = Convert.ToInt32(Request["id"]);
-                ViewData.Model= markBLL.GetNameAndScore(id);
-                return View();
-            }
-            else
-            {
-                Response.Redirect("GradeError");
-                return Content("Error");
-            }
-            
+            IMarkBLL markBLL = new MarkManager();
+            int id = Convert.ToInt32(Request["id"]);
+            ViewData.Model= markBLL.GetNameAndScore(id);
+            return View();
         }
 
         public ActionResult SaveScore()

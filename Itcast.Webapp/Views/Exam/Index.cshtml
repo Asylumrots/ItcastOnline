@@ -19,21 +19,21 @@
         <h3>@ViewBag.Message</h3>*@
     <hr />
     @{ int id = 1;}
-        @foreach (var item in Model)
+    @foreach (var item in Model)
+    {
+        if (item.Answer.Length <= 1)
         {
-            if (item.Answer.Length <= 1)
-            {
-                <div class="container">
-                    <form name="optionForm">
-                        <div class="col-md-12"><label class="h4">@id.</label>@item.Title</div>
-                        <div class="col-md-12"><input type="radio" value="A" name="option" onclick="check(@item.TopicID,this.value)">&nbsp;A：@item.AnswerA</div>
-                        <div class="col-md-12"><input type="radio" value="B" name="option" onclick="check(@item.TopicID,this.value)">&nbsp;B：@item.AnswerB</div>
-                        <div class="col-md-12"><input type="radio" value="C" name="option" onclick="check(@item.TopicID,this.value)">&nbsp;C：@item.AnswerC</div>
-                        <div class="col-md-12"><input type="radio" value="D" name="option" onclick="check(@item.TopicID,this.value)">&nbsp;D：@item.AnswerD</div>
-                    </form>
-                    <div class="col-md-12 ans" id="ans@{@item.TopicID}"></div>
-                    <hr />
-                </div>
+            <div class="container">
+                <form name="optionForm">
+                    <div class="col-md-12"><label class="h4">@id.</label>@item.Title</div>
+                    <div class="col-md-12"><input type="radio" value="A" name="option" onclick="check(@item.TopicID,this.value)">&nbsp;A：@item.AnswerA</div>
+                    <div class="col-md-12"><input type="radio" value="B" name="option" onclick="check(@item.TopicID,this.value)">&nbsp;B：@item.AnswerB</div>
+                    <div class="col-md-12"><input type="radio" value="C" name="option" onclick="check(@item.TopicID,this.value)">&nbsp;C：@item.AnswerC</div>
+                    <div class="col-md-12"><input type="radio" value="D" name="option" onclick="check(@item.TopicID,this.value)">&nbsp;D：@item.AnswerD</div>
+                </form>
+                <div class="col-md-12 ans" id="ans@{@item.TopicID}"></div>
+                <hr />
+            </div>
         }
         else
         {
@@ -146,27 +146,27 @@
                     })
                 }
             })
-            
+
         })
     })
 
     </script>
     <div class="container">
-    <input type="button" value="提交" class="btn btn-success" id="submitJson" />
-    <div>
-        您的分数：<p id="fenshu" style="display:inline;font-size:x-large;position:relative;left:10px;"></p>
-    </div>
-    <address>
-        One Microsoft Way<br />
-        Redmond, WA 98052-6399<br />
-        <abbr title="Phone">P:</abbr>
-        425.555.0100
-    </address>
+        <input type="button" value="提交" class="btn btn-success" id="submitJson" />
+        <div>
+            您的分数：<p id="fenshu" style="display:inline;font-size:x-large;position:relative;left:10px;"></p>
+        </div>
+        <address>
+            One Microsoft Way<br />
+            Redmond, WA 98052-6399<br />
+            <abbr title="Phone">P:</abbr>
+            425.555.0100
+        </address>
 
-    <address>
-        <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-    </address>
+        <address>
+            <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+            <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+        </address>
     </div>
 </body>
 </html>
