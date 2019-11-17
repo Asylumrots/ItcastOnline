@@ -51,7 +51,7 @@ namespace Itcast.Webapp.Controllers
         public ActionResult Test()
         {
             ITestBLL testBLL = new TestManager();
-            ViewData.Model = testBLL.LoadEntity(u => true);
+            ViewData.Model = testBLL.LoadEntity(u => true).OrderByDescending(u=>u.TestEndTime);
             return View();
         }
 

@@ -18,7 +18,7 @@
     <div class="container">
         <h3 style="margin-left:16%">安全设置</h3>
         <hr />
-        <form action="/Edit/ModifyUserPwd" method="post" class="form-horizontal">
+        <form action="/Edit/ModifyUserPwd" method="post" class="form-horizontal" id="SecurityForm">
             <h4 style="margin-left:16%">修改密码</h4><br />
             <div class="form-group">
                 <label for="OldPwd" class="col-md-2 control-label">旧密码：</label>
@@ -46,5 +46,19 @@
             </div>
         </form>
     </div>
+    <script>
+        function submit() {
+            if ($("#OldPwd").val() == "" || $("#NewPwd").val() == "" || $("#NewPwd2").val() == "") {
+                alert("信息不能为空!");
+                return false;
+            }
+            if ($("#NewPwd").val() != $("#NewPwd2").val()) {
+                alert("两次新密码不一致!");
+                return false;
+            }
+            var form = document.getElementById('SecurityForm').submit();
+            form.submit();
+        }
+    </script>
 </body>
 </html>

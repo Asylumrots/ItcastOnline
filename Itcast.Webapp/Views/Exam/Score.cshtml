@@ -33,6 +33,7 @@
                     <td>分数</td>
                 </tr>
                 @{
+                    int tr = 0;
                     foreach (KeyValuePair<string, string> item in Model)
                     {
                         var css = "";
@@ -44,16 +45,24 @@
                         {
                             css = "orange";
                         }
-                        else {
+                        else
+                        {
                             css = "red";
                         }
+                        tr++;
                         <tr class="">
                             <td>@item.Key</td>
                             <td style="color:@css; font-weight:bold">@item.Value</td>
                         </tr>
                     }
+                    if (tr == 0)
+                    {
+                        <tr class="">
+                            <td colspan="2">暂无信息</td>
+                        </tr>
+                    }
                 }
-                
+
             </table>
             <div style="margin-left:43%;"><a href="javascript:window.opener=null;window.close();"><input type="button" class="btn btn-primary" value="确认并关闭"></a></div>
             
