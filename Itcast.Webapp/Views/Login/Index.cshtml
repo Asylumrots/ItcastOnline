@@ -186,11 +186,11 @@
         }
 
         function Login() {
-            $("#btnLogin").val("登录中...");
+            $("#btnLogin").val("登录中...").prop("disabled", "disabled");
         }
 
         function register() {
-            $("#btnRegister").val("注册中...");
+            $("#btnRegister").val("注册中...").prop("disabled", "disabled");
         }
 
         function afterLogin(data) {
@@ -202,14 +202,14 @@
                 $("#validateImg").attr("src", $("#validateImg").attr("src") + 1);
                 $("#loginError").show();
                 $("#loginMessage").text("用户名或密码错误！");
-                $("#btnLogin").val("登录");
+                $("#btnLogin").val("登录").prop("disabled", "");
             }
             else if (data == "validateError") {
                 $("#validateImg").attr("src", $("#validateImg").attr("src") + 1);
                 $("#validate").val("");
                 $("#loginError").show();
                 $("#loginMessage").text("验证码错误！");
-                $("#btnLogin").val("登录");
+                $("#btnLogin").val("登录").prop("disabled", "");
             }
             else {
                 $("#btnLogin").val("登录");
@@ -224,10 +224,10 @@
             else if (data == "registerNo") {
                 $("#registerError").show();
                 $("#registerMessage").val("注册失败！请重试");
-                $("#btnRegister").val("注册");
+                $("#btnRegister").val("注册").prop("disabled", "");
             }
             else {
-                $("#btnRegister").val("注册");
+                $("#btnRegister").val("注册").prop("disabled", "");
                 alert("系统繁忙！");
             }
         }

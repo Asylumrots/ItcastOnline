@@ -13,14 +13,14 @@ namespace Itcast.DAL
     {
         public int GetEndTestNum()
         {
-            string sql = "select count(*) from Test where TestEndTime>GETDATE()";
+            string sql = "select count(*) from Test where TestEndTime<=GETDATE()";
             DataTable dt = Tool.getData(sql);
             return Convert.ToInt32(dt.Rows[0][0]);
         }
 
         public int GetIngTestNum()
         {
-            string sql = "select count(*) from Test where TestEndTime<=GETDATE()";
+            string sql = "select count(*) from Test where TestEndTime>GETDATE()";
             DataTable dt = Tool.getData(sql);
             return Convert.ToInt32(dt.Rows[0][0]);
         }

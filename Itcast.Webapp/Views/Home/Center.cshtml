@@ -264,7 +264,9 @@
             imgCtx.textAlign = "center";
             imgCtx.textBaseLine = "middle";
             imgCtx.font = "50px bold Lucida Sans";
-            imgCtx.fillText("欢迎进入  统测系统", imgCanvas.width / 2, imgCanvas.height / 2);
+
+            var showText = "欢迎进入  统测系统";
+            imgCtx.fillText(showText, imgCanvas.width / 2, imgCanvas.height / 2);
             return imgCanvas;
         }
 
