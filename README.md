@@ -4,9 +4,9 @@
 
 基于ASP.NET MVC（目标框架.NET Framework 4.5.2） + Entity Framework（版本：6.1.3）  
    
-在线访问：[线上地址](http://zhangfive.cn)   （首次登录请注册，新注册用户权限仅为普通用户）
+在线访问： [线上地址](http://zhangfive.cn)   （首次登录请注册，新注册用户权限仅为普通用户）
 
-目前版本为 v1.2
+目前版本为 v1.3.1
 
 ## 预览页面
 
@@ -42,6 +42,6 @@ Itcast.Webapp 网站
 
 ## 许可
 
-[MIT license](https://github.com/Asylumrots/ItcastOnline)
+[MIT license](https://github.com/Asylumrots/ItcastOnline/blob/master/LICENSE)
 
 Copyright (c) 2019-present Asylumrots

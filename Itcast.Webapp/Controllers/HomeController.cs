@@ -16,9 +16,15 @@ namespace Itcast.Webapp.Controllers
 
     public class HomeController : BaseController //Base
     {
+        //分页属性
         public int PageIndex { get; set; }
         public int PageSize { get; set; }
         public int PageCount { get; set; }
+
+        /// <summary>
+        /// 主页视图
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             ViewData["User"] = Session["Userinfo"];
@@ -32,11 +38,19 @@ namespace Itcast.Webapp.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 用户主页
+        /// </summary>
+        /// <returns></returns>
         public ActionResult UserIndex()
         {
             return View();
         }
 
+        /// <summary>
+        /// 中心视图
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Center()
         {
             TopicManager topicBLL = new TopicManager();
@@ -48,6 +62,10 @@ namespace Itcast.Webapp.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 统测视图
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Test()
         {
             ITestBLL testBLL = new TestManager();
@@ -55,6 +73,10 @@ namespace Itcast.Webapp.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 自测视图
+        /// </summary>
+        /// <returns></returns>
         public ActionResult MyTest()
         {
             IUserInfoBLL userInfoBLL = new UserInfoManager();
@@ -62,6 +84,10 @@ namespace Itcast.Webapp.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 自测题目视图
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Exam()
         {
             int nums = Convert.ToInt32(Request["nums"]);
@@ -71,6 +97,10 @@ namespace Itcast.Webapp.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 用户信息视图
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Info()
         {
             return View();
@@ -106,11 +136,19 @@ namespace Itcast.Webapp.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 账户安全视图
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Security()
         {
             return View();
         }
 
+        /// <summary>
+        /// 题目信息视图
+        /// </summary>
+        /// <returns></returns>
         public ActionResult TopicInfo()
         {
             ItcastEntities db = new ItcastEntities();
@@ -138,6 +176,10 @@ namespace Itcast.Webapp.Controllers
             return View();
         }
         
+        /// <summary>
+        /// 视图管理页面
+        /// </summary>
+        /// <returns></returns>
         [GradeFilter]
         public ActionResult TopicManager()
         {
@@ -168,7 +210,10 @@ namespace Itcast.Webapp.Controllers
 
 
         TopicManager examTopicManager = new TopicManager();
-        //通过ID和选种的答案判断是否正确
+        /// <summary>
+        /// 通过ID和选种的答案判断是否正确
+        /// </summary>
+        /// <returns>是否正确</returns>
         public bool SelectOption()
         {
             double TopicID = Convert.ToDouble(Request["TopicID"]);
@@ -183,7 +228,12 @@ namespace Itcast.Webapp.Controllers
                 return false;
             }
         }
-        //通过传入的题目数量返回相应的随机题目
+
+        /// <summary>
+        /// 通过传入的题目数量返回相应的随机题目
+        /// </summary>
+        /// <param name="nums">题目数量</param>
+        /// <returns>题目列表集合</returns>
         public List<Topic> GetTopic(int nums)
         {
             List<Topic> topicList = examTopicManager.getTestTopicInfo(nums);
@@ -196,7 +246,10 @@ namespace Itcast.Webapp.Controllers
         //}
 
         //Dictionary<double, string> truenums = new Dictionary<double, string>();
-        //IO获得ajax传递的json数据并和数据库比对判断正确性， 返回正确答案的json字符串
+        /// <summary>
+        /// IO获得ajax传递的json数据并和数据库比对判断正确性， 返回正确答案的json字符串
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult FullTopicTrue()
         {
@@ -237,7 +290,13 @@ namespace Itcast.Webapp.Controllers
             //return truenums;
         }
 
-        //将字典集合转换成json字符串
+        /// <summary>
+        /// 将字典集合转换成json字符串
+        /// </summary>
+        /// <typeparam name="TKey"></typeparam>
+        /// <typeparam name="TValue"></typeparam>
+        /// <param name="dict"></param>
+        /// <returns></returns>
         public static string SerializeDictionaryToJsonString<TKey, TValue>(Dictionary<TKey, TValue> dict)
         {
             if (dict.Count == 0)

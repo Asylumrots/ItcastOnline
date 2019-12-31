@@ -13,6 +13,10 @@ namespace Itcast.Webapp.Controllers
     public class ExamController : BaseController
     {
         // GET: Exam
+        /// <summary>
+        /// 统测页面视图
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             int id = Convert.ToInt32(Request["id"]);
@@ -42,7 +46,10 @@ namespace Itcast.Webapp.Controllers
             return View();
         }
 
-        //查看分数
+        /// <summary>
+        /// 查看分数视图
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Score()
         {
             IMarkBLL markBLL = new MarkManager();
@@ -51,6 +58,10 @@ namespace Itcast.Webapp.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 保存分数信息
+        /// </summary>
+        /// <returns></returns>
         public ActionResult SaveScore()
         {
             int testId = Convert.ToInt32(Request["TestId"].ToString());
